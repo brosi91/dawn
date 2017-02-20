@@ -12,6 +12,11 @@ public class Scr_Jellyfish : MonoBehaviour {
 	private float LocalHeight;
 	private float WordHeight;
 	[HideInInspector] public Transform Hand;
+    public Transform Goal;
+
+    public float MaxDistance;
+    public float MinDistance;
+    public float sinkSpeed;
 
 	void Awake(){
 		LocalHeight = Top.transform.position.y - Root.transform.position.y;
@@ -27,13 +32,40 @@ public class Scr_Jellyfish : MonoBehaviour {
 
 	void LateUpdate(){
 
-		if(Hand != null){
-			Root.transform.position = Hand.position;
-			WordHeight = Hand.position.y + LocalHeight;
-		}
+        if (Hand != null)
+        {
+            Root.transform.position = Hand.position;
+            WordHeight = Hand.position.y + LocalHeight;
+            // FixedJoint  joint = gameObject.AddComponent<FixedJoint>();
+            //joint.connectedBody = Hand.GetComponent<Rigidbody>();
+        }
 
+
+        else
+        {
+            RaycastHit hit;
+            Vector3 target;
+
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit))
+            {
+                if (hit.distance > MaxDistance) {
+                    Root.transform.position += Vector3.down * sinkSpeed * Time.deltaTime;
+                }
+                if (hit.distance < MinDistance)
+                {
+                    Root.transform.position -= Vector3.down * sinkSpeed * Time.deltaTime;
+                }
+            }
+        }
 	}
 
+    public void JellyToGoal() {
+        if (Goal != null)
+        {
+            Root.transform.position = Goal.position;
+            WordHeight = Goal.position.y + LocalHeight;
+        }
+    }
 	/*void OnTriggerEnter(Collider col){
 		//hat kollisionsobjekt dieses script
 		Scr_PlayerInput Player = col.gameObject.GetComponent<Scr_PlayerInput>();

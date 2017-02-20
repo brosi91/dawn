@@ -28,6 +28,10 @@ public class Scr_ItemManager : MonoBehaviour {
     public Transform Hand;
     public Transform Lantern;
 
+    //Position für Jellyfish_Lightsource
+    public Transform Goal;
+    bool inTrigger = false;
+
 
     // Die Referenzen zu den Items, die sich gegenwärtig im Inventar befinden.
     // InLantern ist eine "List" - Das bedeutet ein Stapel von Objekten des angegebenen Typs.
@@ -49,14 +53,19 @@ public class Scr_ItemManager : MonoBehaviour {
 
 	void Update () {
         if (Input.GetKeyDown(HandKey)) {
-            if (ActiveItemHand != null) {
-            	Debug.Log("Pick up");
+            if (ActiveItemHand != null)
+            {
+                Debug.Log("Pick up");
                 StartCoroutine(PickUpHand());
                 // Hier soll später die PickUp-Animation getriggert werden
             }
-            else {
+            else if (inTrigger == true) {
+                StartCoroutine(TossHandToLight());
+            }
+            else
+            {
                 StartCoroutine(TossHand());
-				Debug.Log("Toss");
+                Debug.Log("Toss");
                 // Hier soll später die Ablege-Animation getriggert werden
             }
         }
@@ -107,6 +116,16 @@ public class Scr_ItemManager : MonoBehaviour {
             HandToWorld(InLantern[0]);
 			InLantern.RemoveAt(0);
         }
+
+     
+    }
+
+    IEnumerator TossHandToLight()
+    {
+        yield return new WaitForSeconds(TossDelayHand);
+
+        HandToLight(InHand);
+        InHand = null;
     }
 
 
@@ -124,6 +143,11 @@ public class Scr_ItemManager : MonoBehaviour {
         else if (other.tag == "ItemLantern") {
             ActiveItemLantern = other.gameObject;
         }
+        else if (other.tag == "TriggerJellyfish")
+        {
+            inTrigger = true;
+            Goal = other.transform;
+        }
     }
 
     void OnTriggerExit(Collider other)
@@ -133,6 +157,11 @@ public class Scr_ItemManager : MonoBehaviour {
         }
         else if (other.tag == "ItemLantern") {
             ActiveItemLantern = null;
+        }
+
+        else if (other.tag == "TriggerJellyfish")
+        {
+            inTrigger = false;
         }
     }
 
@@ -159,6 +188,14 @@ public class Scr_ItemManager : MonoBehaviour {
 		item.GetComponent<Rigidbody>().angularVelocity = Vector3.zero; 
     }
 
+    void HandToLight(GameObject item) {
+        item.tag = "ItemHand";
+        item.GetComponent<Scr_Jellyfish>().Hand = null;
+        item.GetComponent<Scr_Jellyfish>().Goal = Goal;
+        item.transform.position = Goal.position;
+        item.GetComponent<Scr_Jellyfish>().JellyToGoal();
+    }
+
     void WorldToLantern(GameObject item) {
         item.tag = "Untagged";
         item.transform.parent = Lantern;
@@ -168,8 +205,5 @@ public class Scr_ItemManager : MonoBehaviour {
         item.tag = "ItemLantern";
         item.transform.parent = null;
     }
-
-
-
 
 }
