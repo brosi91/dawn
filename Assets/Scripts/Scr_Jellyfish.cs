@@ -11,7 +11,7 @@ public class Scr_Jellyfish : MonoBehaviour {
 
 	private float LocalHeight;
 	private float WordHeight;
-	private Transform Hand;
+	[HideInInspector] public Transform Hand;
 
 	void Awake(){
 		LocalHeight = Top.transform.position.y - Root.transform.position.y;
@@ -34,13 +34,13 @@ public class Scr_Jellyfish : MonoBehaviour {
 
 	}
 
-	void OnTriggerEnter(Collider col){
+	/*void OnTriggerEnter(Collider col){
 		//hat kollisionsobjekt dieses script
 		Scr_PlayerInput Player = col.gameObject.GetComponent<Scr_PlayerInput>();
 
 		if(Player != null){
 			Hand = Player.Hand;
 		}
-	}
+	}*/
 
 }
