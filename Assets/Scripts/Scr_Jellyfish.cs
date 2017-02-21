@@ -12,14 +12,18 @@ public class Scr_Jellyfish : MonoBehaviour {
 	private float LocalHeight;
 	private float WordHeight;
 	[HideInInspector] public Transform Hand;
-    public Transform Goal;
+    [HideInInspector] public Transform Goal;
 
     public float MaxDistance;
     public float MinDistance;
     public float sinkSpeed;
 
+  //  public GameObject LightJelly;
+
+
 	void Awake(){
 		LocalHeight = Top.transform.position.y - Root.transform.position.y;
+       // LightJelly.SetActive(false);
 	}
 
 	void FixedUpdate(){
@@ -66,13 +70,16 @@ public class Scr_Jellyfish : MonoBehaviour {
             WordHeight = Goal.position.y + LocalHeight;
         }
     }
-	/*void OnTriggerEnter(Collider col){
-		//hat kollisionsobjekt dieses script
-		Scr_PlayerInput Player = col.gameObject.GetComponent<Scr_PlayerInput>();
 
-		if(Player != null){
-			Hand = Player.Hand;
-		}
-	}*/
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "TriggerJellyfish"&& Goal != null)
+        {
+            other.GetComponentInChildren<Scr_TriggerLight>().SwitchLightOn();
+            Debug.Log("Switch");
+        } 
+        
+    }
+
 
 }

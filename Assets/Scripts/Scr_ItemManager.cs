@@ -31,7 +31,8 @@ public class Scr_ItemManager : MonoBehaviour {
     //Position für Jellyfish_Lightsource
     public Transform Goal;
     bool inTrigger = false;
-
+    bool GoalRemove = false;
+    private Scr_TriggerLight triggerLight;
 
     // Die Referenzen zu den Items, die sich gegenwärtig im Inventar befinden.
     // InLantern ist eine "List" - Das bedeutet ein Stapel von Objekten des angegebenen Typs.
@@ -147,6 +148,7 @@ public class Scr_ItemManager : MonoBehaviour {
         {
             inTrigger = true;
             Goal = other.transform;
+            triggerLight = other.GetComponentInChildren<Scr_TriggerLight>();
         }
     }
 
@@ -175,6 +177,10 @@ public class Scr_ItemManager : MonoBehaviour {
         item.tag = "Untagged";
         item.GetComponent<Scr_Jellyfish>().Hand = Hand;
         item.transform.position = Hand.position;
+        if (GoalRemove == true) {
+            triggerLight.SwitchLightOn();
+            GoalRemove = false; 
+        }
     }
     void HandToWorld(GameObject item) {
         item.tag = "ItemHand";
@@ -194,6 +200,7 @@ public class Scr_ItemManager : MonoBehaviour {
         item.GetComponent<Scr_Jellyfish>().Goal = Goal;
         item.transform.position = Goal.position;
         item.GetComponent<Scr_Jellyfish>().JellyToGoal();
+        GoalRemove = true;
     }
 
     void WorldToLantern(GameObject item) {
