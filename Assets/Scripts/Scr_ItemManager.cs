@@ -73,9 +73,12 @@ public class Scr_ItemManager : MonoBehaviour {
 
         if (Input.GetKeyDown(LanternKey)) {
 			if (ActiveItemLantern != null && InLantern.Count < 3) {
-                StartCoroutine(PickUpLantern());
-                // Hier soll später die PickUp-Animation getriggert werden
-            }
+				StartCoroutine (PickUpLantern ());
+				// Hier soll später die PickUp-Animation getriggert werden
+
+			} else if (inTrigger == true) {
+				StartCoroutine (TossLanternToLight ());
+			}
             else {
                 StartCoroutine(TossLantern());
                 // Hier soll später die Ablege-Animation getriggert werden
@@ -130,6 +133,15 @@ public class Scr_ItemManager : MonoBehaviour {
         InHand = null;
     }
 
+	IEnumerator TossLanternToLight(){
+		yield return new WaitForSeconds(TossDelayHand);
+
+		if (InLantern.Count > 0) {
+			LanternToLight(InLantern[0]);
+			InLantern.RemoveAt(0);
+		}
+	}
+
 
 
     // Über OnTriggerEnter checken wir, ob sich ein getagtes Item für Hand oder Laterne in Reichweite befindet.
@@ -146,7 +158,7 @@ public class Scr_ItemManager : MonoBehaviour {
 			Debug.Log ("Found Lantern Thingy: " + other.gameObject.name);
             ActiveItemLantern = other.gameObject;
         }
-        else if (other.tag == "TriggerJellyfish")
+		else if (other.tag == "TriggerJellyfish"|| other.tag == "TriggerFirefly")
         {
             inTrigger = true;
             Goal = other.transform;
@@ -167,7 +179,15 @@ public class Scr_ItemManager : MonoBehaviour {
         else if (other.tag == "TriggerJellyfish")
         {
             inTrigger = false;
+			other.GetComponent<Scr_Jellyfish> ().Goal = null;
         }
+			
+
+		else if (other.tag == "TriggerFirefly")
+		{
+			inTrigger = false;
+			other.GetComponent<Scr_Firefly> ().Goal = null;
+		}
     }
 
 
@@ -213,10 +233,26 @@ public class Scr_ItemManager : MonoBehaviour {
         item.tag = "Untagged";
         item.transform.parent = Lantern;
         item.transform.position = Lantern.position;
+		if (GoalRemove == true) {
+			triggerLight.SwitchLightOff ();
+			// stop swimming as soon as pick up
+			GetComponent<Scr_PlayerInput> ().DisableSwim ();
+			GoalRemove = false; 
+		}
     }
+
     void LanternToWorld(GameObject item) {
         item.tag = "ItemLantern";
         item.transform.parent = null;
     }
+
+	void LanternToLight(GameObject item){
+		item.tag = "ItemLantern";
+		item.transform.parent = null;
+		item.transform.position = Goal.position;
+		item.GetComponent<Scr_Firefly> ().FireflyToGoal ();
+		triggerLight.SwitchLightOn ();
+		GoalRemove = true;
+	}
 
 }

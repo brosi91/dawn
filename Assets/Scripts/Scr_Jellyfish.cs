@@ -67,6 +67,7 @@ public class Scr_Jellyfish : MonoBehaviour {
         if (Goal != null)
         {
             Root.transform.position = Goal.position;
+
             WordHeight = Goal.position.y + LocalHeight;
         }
     }
