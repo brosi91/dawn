@@ -38,7 +38,7 @@ public class Scr_ItemManager : MonoBehaviour {
     // InLantern ist eine "List" - Das bedeutet ein Stapel von Objekten des angegebenen Typs.
     // Wenn du nicht weisst wie sich Listen von Arrays unterscheiden ... ähm ... Frag mich einfach.
     GameObject InHand;
-    List<GameObject> InLantern;
+	List<GameObject> InLantern = new List<GameObject>();
 
 
     // Die Referenzen zu den Items die sich jetzt gerade in Reichweite befinden.
@@ -72,7 +72,7 @@ public class Scr_ItemManager : MonoBehaviour {
         }
 
         if (Input.GetKeyDown(LanternKey)) {
-            if (ActiveItemLantern != null && InLantern.Count < 3) {
+			if (ActiveItemLantern != null && InLantern.Count < 3) {
                 StartCoroutine(PickUpLantern());
                 // Hier soll später die PickUp-Animation getriggert werden
             }
@@ -81,6 +81,7 @@ public class Scr_ItemManager : MonoBehaviour {
                 // Hier soll später die Ablege-Animation getriggert werden
             }
         }
+
     }
 
     
@@ -114,7 +115,7 @@ public class Scr_ItemManager : MonoBehaviour {
         yield return new WaitForSeconds(TossDelayHand);
 
         if (InLantern.Count > 0) {
-            HandToWorld(InLantern[0]);
+            LanternToWorld(InLantern[0]);
 			InLantern.RemoveAt(0);
         }
 
@@ -142,6 +143,7 @@ public class Scr_ItemManager : MonoBehaviour {
             ActiveItemHand = other.gameObject;
         }
         else if (other.tag == "ItemLantern") {
+			Debug.Log ("Found Lantern Thingy: " + other.gameObject.name);
             ActiveItemLantern = other.gameObject;
         }
         else if (other.tag == "TriggerJellyfish")
@@ -158,6 +160,7 @@ public class Scr_ItemManager : MonoBehaviour {
             ActiveItemHand = null;
         }
         else if (other.tag == "ItemLantern") {
+			Debug.Log ("I have left the lantern Thingy.");
             ActiveItemLantern = null;
         }
 
