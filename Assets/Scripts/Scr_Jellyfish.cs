@@ -71,7 +71,7 @@ public class Scr_Jellyfish : MonoBehaviour {
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    /*void OnTriggerEnter(Collider other)
     {
         if (other.tag == "TriggerJellyfish"&& Goal != null)
         {
@@ -79,7 +79,7 @@ public class Scr_Jellyfish : MonoBehaviour {
             Debug.Log("Switch");
         } 
         
-    }
+    }*/
 
 
 }

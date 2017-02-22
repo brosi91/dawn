@@ -178,7 +178,9 @@ public class Scr_ItemManager : MonoBehaviour {
         item.GetComponent<Scr_Jellyfish>().Hand = Hand;
         item.transform.position = Hand.position;
         if (GoalRemove == true) {
-            triggerLight.SwitchLightOn();
+            triggerLight.SwitchLightOff();
+            // stop swimming as soon as pick up
+            GetComponent<Scr_PlayerInput>().DisableSwim();
             GoalRemove = false; 
         }
     }
@@ -200,6 +202,7 @@ public class Scr_ItemManager : MonoBehaviour {
         item.GetComponent<Scr_Jellyfish>().Goal = Goal;
         item.transform.position = Goal.position;
         item.GetComponent<Scr_Jellyfish>().JellyToGoal();
+        triggerLight.SwitchLightOn();
         GoalRemove = true;
     }
 

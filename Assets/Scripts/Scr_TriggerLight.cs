@@ -19,5 +19,6 @@ public class Scr_TriggerLight : MonoBehaviour {
 
     public void SwitchLightOff() {
         LightOn.SetActive(false);
+
     }
 }

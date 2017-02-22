@@ -69,10 +69,14 @@ public class Scr_PlayerInput : MonoBehaviour {
 
     void OnTriggerExit(Collider other){
     if(other.gameObject.tag == "Light"){
-	    	m_Character.SetSwim(false);
-	    	Swim = false;
+	    	DisableSwim();
 	    	m_Character.DolphinJump(m_Move);
     	}
+    }
+
+    public void DisableSwim(){
+		m_Character.SetSwim(false);
+	    Swim = false;
     }
 	
 }
