@@ -18,12 +18,16 @@ public class Scr_Jellyfish : MonoBehaviour {
     public float MinDistance;
     public float sinkSpeed;
 
+    public bool inGoal;
+
   //  public GameObject LightJelly;
 
 
 	void Awake(){
 		LocalHeight = Top.transform.position.y - Root.transform.position.y;
        // LightJelly.SetActive(false);
+       inGoal = false;
+
 	}
 
 	void FixedUpdate(){
@@ -58,6 +62,9 @@ public class Scr_Jellyfish : MonoBehaviour {
                 if (hit.distance < MinDistance)
                 {
                     Root.transform.position -= Vector3.down * sinkSpeed * Time.deltaTime;
+                }
+                if ( inGoal == true && Goal != null){
+                	Root.transform.position = Goal.transform.position;
                 }
             }
         }

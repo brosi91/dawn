@@ -5,6 +5,13 @@ using UnityEngine;
 public class Scr_Firefly : MonoBehaviour {
 
 	[HideInInspector] public Transform Goal;
+	public bool inGoal;
+	public bool inDouble;
+
+	void Awake(){
+		inGoal = false;
+		inDouble = false;
+	}
 
 	public void FireflyToGoal() {
 		if (Goal != null)
