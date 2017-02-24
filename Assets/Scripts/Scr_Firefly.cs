@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Scr_Firefly : MonoBehaviour {
 
-	[HideInInspector] public Transform Goal;
+	 public Transform Goal;
 	public bool inGoal;
 	public bool inDouble;
 
@@ -13,11 +13,11 @@ public class Scr_Firefly : MonoBehaviour {
 		inDouble = false;
 	}
 
-	public void FireflyToGoal() {
+	/*public void FireflyToGoal() {
 		if (Goal != null)
 		{
 			transform.position = Goal.position;
 
 		}
-	}
+	}*/
 }

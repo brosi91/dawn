@@ -70,14 +70,14 @@ public class Scr_Jellyfish : MonoBehaviour {
         }
 	}
 
-    public void JellyToGoal() {
+   /* public void JellyToGoal() {
         if (Goal != null)
         {
             Root.transform.position = Goal.position;
 
             WordHeight = Goal.position.y + LocalHeight;
         }
-    }
+    }*/
 
     /*void OnTriggerEnter(Collider other)
     {

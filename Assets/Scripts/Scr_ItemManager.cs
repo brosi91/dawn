@@ -30,19 +30,21 @@ public class Scr_ItemManager : MonoBehaviour {
 
     //Position für Jellyfish_Lightsource
     public Transform Goal;
-    bool inTrigger = false;
+    bool inTriggerJelly = false;
+	bool inTriggerFirefly = false;
     bool inDoubleTrigger = false;
     // bool GoalRemove = false;
     private Scr_TriggerLight triggerLight;
     private Scr_DoubleLightSource doubleLight;
     private Scr_Firefly Firefly;
     private Scr_Jellyfish Jellyfish;
+	private Scr_ContainItem ContainItem;
 
     // Die Referenzen zu den Items, die sich gegenwärtig im Inventar befinden.
     // InLantern ist eine "List" - Das bedeutet ein Stapel von Objekten des angegebenen Typs.
     // Wenn du nicht weisst wie sich Listen von Arrays unterscheiden ... ähm ... Frag mich einfach.
     GameObject InHand;
-	List<GameObject> InLantern = new List<GameObject>();
+	public List<GameObject> InLantern = new List<GameObject>();
 
 
     // Die Referenzen zu den Items die sich jetzt gerade in Reichweite befinden.
@@ -60,17 +62,15 @@ public class Scr_ItemManager : MonoBehaviour {
         if (Input.GetKeyDown(HandKey)) {
             if (ActiveItemHand != null)
             {
-                Debug.Log("Pick up");
                 StartCoroutine(PickUpHand());
                 // Hier soll später die PickUp-Animation getriggert werden
             }
-            else if (inTrigger == true) {
+			else if (inTriggerJelly == true && InHand != null) {
                 StartCoroutine(TossHandToLight());
             }
-            else
+			else if (InHand != null)
             {
-                StartCoroutine(TossHand());
-                Debug.Log("Toss");
+				StartCoroutine(TossHand());
                 // Hier soll später die Ablege-Animation getriggert werden
             }
         }
@@ -81,14 +81,14 @@ public class Scr_ItemManager : MonoBehaviour {
 				// Hier soll später die PickUp-Animation getriggert werden
 
 			} 
-			else if (inTrigger == true) {
+			else if (inTriggerFirefly == true && InLantern.Count > 0) {
 				StartCoroutine (TossLanternToLight ());
 			}
-			else if (inDoubleTrigger == true){
+			else if (inDoubleTrigger == true && InLantern.Count > 0){
 				StartCoroutine(TossLanternToDouble());
 			}
-            else {
-                StartCoroutine(TossLantern());
+			else if(InLantern.Count > 0){
+				StartCoroutine(TossLantern());
                 // Hier soll später die Ablege-Animation getriggert werden
             }
         }
@@ -108,9 +108,9 @@ public class Scr_ItemManager : MonoBehaviour {
     IEnumerator PickUpLantern() {
         yield return new WaitForSeconds(PickUpDelayLantern);
 
-        InLantern.Add(ActiveItemLantern);
+        //InLantern.Add(ActiveItemLantern);
         WorldToLantern(ActiveItemLantern);
-		ActiveItemLantern = null;
+		//ActiveItemLantern = null;
     }
 
 
@@ -127,10 +127,9 @@ public class Scr_ItemManager : MonoBehaviour {
 
         if (InLantern.Count > 0) {
             LanternToWorld(InLantern[0]);
-			InLantern.RemoveAt(0);
-        }
 
-     
+
+        }  
     }
 
     IEnumerator TossHandToLight()
@@ -146,7 +145,7 @@ public class Scr_ItemManager : MonoBehaviour {
 
 		if (InLantern.Count > 0) {
 			LanternToLight(InLantern[0]);
-			InLantern.RemoveAt(0);
+
 		}
 	}
 
@@ -155,7 +154,7 @@ public class Scr_ItemManager : MonoBehaviour {
 
 		if (InLantern.Count > 0) {
 			LanternToDoubleLight(InLantern[0]);
-			InLantern.RemoveAt(0);
+
 		}
 
 	}
@@ -177,19 +176,29 @@ public class Scr_ItemManager : MonoBehaviour {
             ActiveItemLantern = other.gameObject;
             Firefly = other.GetComponent<Scr_Firefly>();
         }
-		else if (other.tag == "TriggerJellyfish"|| other.tag == "TriggerFirefly")
+		else if (other.tag == "TriggerJellyfish")
         {
-            inTrigger = true;
+            inTriggerJelly = true;
             Goal = other.transform;
             triggerLight = other.GetComponentInChildren<Scr_TriggerLight>();
+			ContainItem = other.GetComponent<Scr_ContainItem> ();
         }
+		else if ( other.tag == "TriggerFirefly")
+		{
+			inTriggerFirefly = true;
+			Goal = other.transform;
+			triggerLight = other.GetComponentInChildren<Scr_TriggerLight>();
+			ContainItem = other.GetComponent<Scr_ContainItem> ();
+		}
 		else if (other.tag == "TriggerDoubleFirefly")
         {
             inDoubleTrigger = true;
             Goal = other.transform;
             triggerLight = other.GetComponentInParent<Scr_TriggerLight>();
             doubleLight = other.GetComponentInParent<Scr_DoubleLightSource>();
+			ContainItem = other.GetComponent<Scr_ContainItem> ();
         }
+        Debug.Log("enter " + other.tag);
 
     }
 
@@ -204,22 +213,33 @@ public class Scr_ItemManager : MonoBehaviour {
 
         else if (other.tag == "TriggerJellyfish")
         {
-            inTrigger = false;
-			Jellyfish.Goal = null;
+            inTriggerJelly = false;
+			if (Jellyfish != null) {
+				Jellyfish.Goal = null;
+			}
+			Goal = null;
         }
 			
 
 		else if (other.tag == "TriggerFirefly")
 		{
-			inTrigger = false;
-			Firefly.Goal = null;
+			inTriggerFirefly = false;
+			if (Firefly != null) {
+				Firefly.Goal = null;
+			}
+			Goal = null;
 		}
 
 		else if (other.tag == "TriggerDoubleFirefly")
 		{
-			inTrigger = false;
-			Firefly.Goal = null;
+			inDoubleTrigger = false;
+			if (Firefly != null) {
+				Firefly.Goal = null;
+			}
+			Goal = null;
+
 		}
+        Debug.Log("leave " + other.tag);
     }
 
 
@@ -232,11 +252,12 @@ public class Scr_ItemManager : MonoBehaviour {
         item.tag = "Untagged";
         Jellyfish.Hand = Hand;
         item.transform.position = Hand.position;
-        if (Jellyfish.inGoal == true) {
+        if (Jellyfish.inGoal == true && ContainItem.containItemCount > 0) {
             triggerLight.SwitchLightOff();
             // stop swimming as soon as pick up
             GetComponent<Scr_PlayerInput>().DisableSwim();
             Jellyfish.inGoal = false; 
+			ContainItem.containItemCount -= 1;
         }
     }
     void HandToWorld(GameObject item) {
@@ -252,23 +273,31 @@ public class Scr_ItemManager : MonoBehaviour {
     }
 
     void HandToLight(GameObject item) {
-        item.tag = "ItemHand";
-        Jellyfish.Hand = null;
-        Jellyfish.Goal = Goal;
-        item.transform.position = Goal.position;
-        Jellyfish.JellyToGoal();
-        triggerLight.SwitchLightOn();
-        //GoalRemove = true;
-        Jellyfish.inGoal = true;
+		if (item.GetComponent<Scr_Jellyfish> () != null && ContainItem.containItemCount < 1) {
+			Debug.Log ("Jelly true");
+			item.tag = "ItemHand";
+			Jellyfish.Hand = null;
+			Jellyfish.Goal = Goal;
+			item.transform.position = Goal.position;
+			//Jellyfish.JellyToGoal ();
+			triggerLight.SwitchLightOn ();
+			//GoalRemove = true;
+			Jellyfish.inGoal = true;
+			ContainItem.containItemCount += 1;
+		}
     }
 
     void WorldToLantern(GameObject item) {
+		InLantern.Add(ActiveItemLantern);
+
         item.tag = "Untagged";
         item.transform.parent = Lantern;
         item.transform.position = Lantern.position;
-		if (Firefly.inGoal) {
+        item.GetComponent<SphereCollider>().enabled = false;
+		Debug.Log (" ich bin " + Firefly.inGoal);
+		if (Firefly.inGoal && ContainItem.containItemCount > 0) {
+			Debug.Log ("in goal is true and containitem is bigger than 0");
 			if(Firefly.inDouble){
-				Debug.Log ("blubb ");
 				Firefly.inDouble = false;
 				doubleLight.counter -=1;
 				doubleLight.DoubleOnOff();
@@ -278,38 +307,59 @@ public class Scr_ItemManager : MonoBehaviour {
 				triggerLight.SwitchLightOff ();
 			}
 			// stop swimming as soon as pick up
+			ContainItem.containItemCount -= 1;
+			Debug.Log("ItemCount--: " + ContainItem.containItemCount);
 			GetComponent<Scr_PlayerInput> ().DisableSwim ();
 			Firefly.inGoal = false; 
 		}
+
+		ActiveItemLantern = null;
 
     }
 
     void LanternToWorld(GameObject item) {
         item.tag = "ItemLantern";
+        item.GetComponent<SphereCollider>().enabled = true;
         item.transform.parent = null;
+		InLantern.RemoveAt(0);
+
+		Debug.Log ("parent removed");
     }
 
 	void LanternToLight(GameObject item){
-		Firefly = Firefly;
-		item.tag = "ItemLantern";
-		item.transform.parent = null;
-		item.transform.position = Goal.position;
-		Firefly.FireflyToGoal ();
-		triggerLight.SwitchLightOn ();
-		//GoalRemove = true;
-		Firefly.inGoal = true;
+		if (item.GetComponent<Scr_Firefly> () != null && ContainItem.containItemCount < 1) {
+			Firefly = item.GetComponent<Scr_Firefly>();
+			item.GetComponent<SphereCollider> ().enabled = true;
+			item.tag = "ItemLantern";
+			item.transform.parent = null;
+			Firefly.Goal = Goal;
+			item.transform.position = Goal.position;
+			//Firefly.FireflyToGoal ();
+			triggerLight.SwitchLightOn ();
+			//GoalRemove = true;
+			Firefly.inGoal = true;
+			ContainItem.containItemCount += 1;
+			InLantern.RemoveAt(0);
+		}
 	}
 
 	void LanternToDoubleLight(GameObject item){
-		item.tag = "ItemLantern";
-		item.transform.parent = null;
-		item.transform.position = Goal.position;
-		Firefly.FireflyToGoal ();
-		Firefly.inGoal = true;
-		Firefly.inDouble = true;
-		doubleLight.counter += 1;
-		doubleLight.DoubleOnOff();
-
+		if (item.GetComponent<Scr_Firefly> () != null && ContainItem.containItemCount < 1) {
+			Firefly = item.GetComponent<Scr_Firefly>();
+			item.GetComponent<SphereCollider> ().enabled = true;
+			item.tag = "ItemLantern";
+			item.transform.parent = null;
+			Firefly.Goal = Goal;
+			item.transform.position = Goal.position;
+			//Firefly.FireflyToGoal ();
+			Firefly.inGoal = true;
+			Firefly.inDouble = true;
+			doubleLight.counter += 1;
+			Debug.Log("Counter++: " + doubleLight.counter);
+			doubleLight.DoubleOnOff ();
+			ContainItem.containItemCount += 1;
+			InLantern.RemoveAt(0);
+		}
 	}
 
 }
