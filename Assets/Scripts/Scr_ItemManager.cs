@@ -39,6 +39,7 @@ public class Scr_ItemManager : MonoBehaviour {
     private Scr_Firefly Firefly;
     private Scr_Jellyfish Jellyfish;
 	private Scr_ContainItem ContainItem;
+	private int counterJelly = 0;
 
     // Die Referenzen zu den Items, die sich gegenwärtig im Inventar befinden.
     // InLantern ist eine "List" - Das bedeutet ein Stapel von Objekten des angegebenen Typs.
@@ -249,31 +250,39 @@ public class Scr_ItemManager : MonoBehaviour {
     // HandToWorld & LanternToWorld machen diese Änderungen wieder rückgängig wenn das Item abgelegt wird.
 
     void WorldToHand (GameObject item) {
-        item.tag = "Untagged";
-        Jellyfish.Hand = Hand;
-        item.transform.position = Hand.position;
-        if (Jellyfish.inGoal == true && ContainItem.containItemCount > 0) {
-            triggerLight.SwitchLightOff();
-            // stop swimming as soon as pick up
-            GetComponent<Scr_PlayerInput>().DisableSwim();
-            Jellyfish.inGoal = false; 
-			ContainItem.containItemCount -= 1;
-        }
+		if (counterJelly < 1) {
+			item.tag = "Untagged";
+			Jellyfish.Hand = Hand;
+			item.transform.position = Hand.position;
+			if (Jellyfish.inGoal == true && ContainItem.containItemCount > 0) {
+				triggerLight.SwitchLightOff ();
+				// stop swimming as soon as pick up
+				GetComponent<Scr_PlayerInput> ().DisableSwim ();
+				Jellyfish.inGoal = false; 
+				ContainItem.containItemCount -= 1;
+			}
+			counterJelly++;
+		}
     }
     void HandToWorld(GameObject item) {
-        item.tag = "ItemHand";
-		Jellyfish.Hand = null;
-		Rigidbody[] rigidBodies = item.GetComponentsInParent<Rigidbody>();
-		foreach (Rigidbody rig in rigidBodies){
-			rig.velocity = Vector3.zero; //Jellyfish hat keine geschwindigkeit mehr (im falle von ablegen bei bewegung)
-			rig.angularVelocity = Vector3.zero; 
+		if (counterJelly > 0) {
+			Jellyfish = item.GetComponent<Scr_Jellyfish> ();
+			item.tag = "ItemHand";
+			Jellyfish.Hand = null;
+			Rigidbody[] rigidBodies = item.GetComponentsInParent<Rigidbody> ();
+			foreach (Rigidbody rig in rigidBodies) {
+				rig.velocity = Vector3.zero; //Jellyfish hat keine geschwindigkeit mehr (im falle von ablegen bei bewegung)
+				rig.angularVelocity = Vector3.zero; 
+			}
+			item.GetComponent<Rigidbody> ().velocity = Vector3.zero; //für letztes child
+			item.GetComponent<Rigidbody> ().angularVelocity = Vector3.zero; 
+			counterJelly--;
 		}
-		item.GetComponent<Rigidbody>().velocity = Vector3.zero; //für letztes child
-		item.GetComponent<Rigidbody>().angularVelocity = Vector3.zero; 
     }
 
     void HandToLight(GameObject item) {
-		if (item.GetComponent<Scr_Jellyfish> () != null && ContainItem.containItemCount < 1) {
+		if (item.GetComponent<Scr_Jellyfish> () != null && ContainItem.containItemCount < 1 && counterJelly > 0) {
+			Jellyfish = item.GetComponent<Scr_Jellyfish> ();
 			Debug.Log ("Jelly true");
 			item.tag = "ItemHand";
 			Jellyfish.Hand = null;
@@ -284,6 +293,7 @@ public class Scr_ItemManager : MonoBehaviour {
 			//GoalRemove = true;
 			Jellyfish.inGoal = true;
 			ContainItem.containItemCount += 1;
+			counterJelly--;
 		}
     }
 
