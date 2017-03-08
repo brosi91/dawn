@@ -12,6 +12,7 @@
 		Tags { "Queue" = "Transparent" "RenderType" = "Transparent" }
 		LOD 200
 		ZWrite off
+		Cull off
 
 CGPROGRAM
 #pragma surface surf ToonRamp addshadow alpha:fade
