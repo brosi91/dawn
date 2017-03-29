@@ -15,9 +15,14 @@ public class Scr_PlayerController : MonoBehaviour {
 
 	Rigidbody rig;
 
+
+
+
+
 	void Awake () {
 		rig = GetComponent<Rigidbody>();
 	}
+
 
 	void FixedUpdate() {
 		MovementSpace.rotation = Quaternion.Euler(0, CameraTarget.rotation.eulerAngles.y, 0);

@@ -258,4 +258,14 @@ public class Scr_Character : MonoBehaviour {
 		m_Rigidbody.AddForce(direction*DolphinForce* Mathf.Clamp01(direction.y));
 	}
 
+	void Update(){
+		if (Input.GetKey(KeyCode.P)){
+			ToggleActive();
+		}
+	}
+
+	//für pausenmenu
+	public void ToggleActive(){
+		enabled = !enabled;
+    }
 }

@@ -13,6 +13,10 @@ public class Scr_PlayerInput : MonoBehaviour {
     private Vector3 m_Move;
     private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
 
+
+	//UI shizzle
+    public GameObject Canvas;
+
     
     private void Start()
     {
@@ -26,6 +30,12 @@ public class Scr_PlayerInput : MonoBehaviour {
         {
             m_Jump = Input.GetAxis("Jump")>0.5f;
         }
+
+		if (Input.GetKey(KeyCode.P)){
+			Canvas.SetActive(true);
+			ToggleActive();
+		}
+
     }
 
 
@@ -78,5 +88,8 @@ public class Scr_PlayerInput : MonoBehaviour {
 		m_Character.SetSwim(false);
 	    Swim = false;
     }
-	
+
+    public void ToggleActive(){
+		enabled = !enabled;
+    }
 }

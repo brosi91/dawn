@@ -15,10 +15,10 @@ public float LerpSpeed;
 
 public Transform Player;
 
-Transform camera;
+public Transform camera;
 
 	void Awake(){
-		camera = GetComponentInChildren<Camera>().transform;
+		//camera = GetComponentInChildren<Camera>().transform;
 		StartMaxDistance = MaxDistance;
 		}
 
