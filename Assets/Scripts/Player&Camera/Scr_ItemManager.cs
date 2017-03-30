@@ -10,7 +10,9 @@ public class Scr_ItemManager : MonoBehaviour {
 
     // Die Tasten für Aktionen mit Hand oder Laterne
     public KeyCode HandKey;
+    public KeyCode HandKeyXbox;
     public KeyCode LanternKey;
+    public KeyCode LanternKeyXbox;
 
 
     // Die Zeitverzögerungen mit der Items aufgenommen oder abgelegt werden sollen.
@@ -41,6 +43,11 @@ public class Scr_ItemManager : MonoBehaviour {
 	private Scr_ContainItem ContainItem;
 	private int counterJelly = 0;
 
+	private Animator ani;
+	private bool handHolding;
+	public float handUpSpeed;
+	public float handDownSpeed;
+
     // Die Referenzen zu den Items, die sich gegenwärtig im Inventar befinden.
     // InLantern ist eine "List" - Das bedeutet ein Stapel von Objekten des angegebenen Typs.
     // Wenn du nicht weisst wie sich Listen von Arrays unterscheiden ... ähm ... Frag mich einfach.
@@ -52,6 +59,12 @@ public class Scr_ItemManager : MonoBehaviour {
     GameObject ActiveItemHand;
     GameObject ActiveItemLantern;
 
+
+    void Awake(){
+
+    	ani = GetComponent<Animator>();
+
+    }
     
 	// Im Update fragen wir die beiden Tasten ab, die für eine Aktion mit der Hand oder der Laterne stehen.
     // Wenn wir feststellen, dass ein Item zum Aufnehmen bereit steht starten wir die PickUp-Coroutine.
@@ -60,26 +73,32 @@ public class Scr_ItemManager : MonoBehaviour {
     // Wenn es nichts zum aufnehmen gibt, legen wir stattdessen ein Item ab.
 
 	void Update () {
-        if (Input.GetKeyDown(HandKey)) {
+        if (Input.GetKeyDown(HandKey) || Input.GetKeyDown(HandKey)) {
             if (ActiveItemHand != null)
             {
-                StartCoroutine(PickUpHand());
-                // Hier soll später die PickUp-Animation getriggert werden
+            	if(counterJelly <1){
+					ani.SetTrigger("GrabRight");
+              		StartCoroutine(PickUpHand());
+              		handHolding = true;
+                }
             }
 			else if (inTriggerJelly == true && InHand != null) {
                 StartCoroutine(TossHandToLight());
+                handHolding = false;
             }
 			else if (InHand != null)
             {
 				StartCoroutine(TossHand());
+				handHolding = false;
                 // Hier soll später die Ablege-Animation getriggert werden
             }
         }
 
-        if (Input.GetKeyDown(LanternKey)) {
+        if (Input.GetKeyDown(LanternKey) || Input.GetKeyDown(LanternKeyXbox)) {
 			if (ActiveItemLantern != null && InLantern.Count < 3) {
+
+				ani.SetTrigger("GrabLeft");
 				StartCoroutine (PickUpLantern ());
-				// Hier soll später die PickUp-Animation getriggert werden
 
 			} 
 			else if (inTriggerFirefly == true && InLantern.Count > 0) {
@@ -160,6 +179,17 @@ public class Scr_ItemManager : MonoBehaviour {
 
 	}
 
+	void FixedUpdate(){
+
+		float weight =  ani.GetLayerWeight(3);
+		if (handHolding == true && weight <1f ){
+			ani.SetLayerWeight(3, weight + handUpSpeed);
+		}
+		else if (handHolding == false && weight >0){
+			ani.SetLayerWeight(3, weight - handDownSpeed);
+		}
+
+	}
 
 
     // Über OnTriggerEnter checken wir, ob sich ein getagtes Item für Hand oder Laterne in Reichweite befindet.

@@ -234,6 +234,7 @@ public class Scr_Character : MonoBehaviour {
 			Quaternion target = Quaternion.LookRotation(move);
 			transform.rotation = Quaternion.RotateTowards(transform.rotation, target, SwimTurnSpeed);
 		}
+		m_Animator.SetFloat("SwimSpeed", move.magnitude);
 
 	}
 

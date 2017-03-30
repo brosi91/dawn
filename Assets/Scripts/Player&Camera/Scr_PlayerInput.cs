@@ -70,7 +70,7 @@ public class Scr_PlayerInput : MonoBehaviour {
         m_Jump = false;
     }
 
-	void OnTriggerEnter(Collider other) {
+	void OnTriggerStay(Collider other) {
 		if (other.gameObject.tag == "Light"){
 			m_Character.SetSwim(true);
 			Swim = true;
