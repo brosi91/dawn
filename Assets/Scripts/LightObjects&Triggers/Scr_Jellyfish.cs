@@ -40,7 +40,7 @@ public class Scr_Jellyfish : MonoBehaviour {
 
 	void LateUpdate(){
 
-        if (Hand != null)
+        if (Hand != null )
         {
             Root.transform.position = Hand.position;
             WordHeight = Hand.position.y + LocalHeight;
@@ -48,8 +48,13 @@ public class Scr_Jellyfish : MonoBehaviour {
             //joint.connectedBody = Hand.GetComponent<Rigidbody>();
         }
 
+		else if(inGoal == true && Goal != null){
+			Root.transform.position = Goal.position;
+            WordHeight = Goal.position.y + LocalHeight;
 
-        else
+		}
+
+        else if (inGoal != true)
         {
             RaycastHit hit;
             Vector3 target;
@@ -63,9 +68,7 @@ public class Scr_Jellyfish : MonoBehaviour {
                 {
                     Root.transform.position -= Vector3.down * sinkSpeed * Time.deltaTime;
                 }
-                if ( inGoal == true && Goal != null){
-                	Root.transform.position = Goal.transform.position;
-                }
+
             }
         }
 	}
