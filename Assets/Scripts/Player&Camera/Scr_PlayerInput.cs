@@ -33,6 +33,8 @@ public class Scr_PlayerInput : MonoBehaviour {
 
 		if (Input.GetKey(KeyCode.P)){
 			Canvas.SetActive(true);
+			m_Character.Move(Vector3.zero, false, false);
+			GetComponent<Rigidbody>().velocity = Vector3.zero;
 			ToggleActive();
 		}
 
