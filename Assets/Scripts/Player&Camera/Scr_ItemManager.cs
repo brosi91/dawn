@@ -73,7 +73,7 @@ public class Scr_ItemManager : MonoBehaviour {
     // Wenn es nichts zum aufnehmen gibt, legen wir stattdessen ein Item ab.
 
 	void Update () {
-        if (Input.GetKeyDown(HandKey) || Input.GetKeyDown(HandKey)) {
+        if (Input.GetKeyDown(HandKey) || Input.GetKeyDown(HandKeyXbox)) {
             if (ActiveItemHand != null)
             {
             	if(counterJelly <1){
