@@ -17,7 +17,22 @@ public class Scr_PlayerInput : MonoBehaviour {
 	//UI shizzle
     public GameObject Canvas;
 
-    
+    private MyPlayerAction characterActions;
+
+	void OnEnable()
+	{
+		// See PlayerActions.cs for this setup.
+		characterActions = MyPlayerAction.CreateWithDefaultBindings();
+	}
+
+
+	void OnDisable()
+	{
+		// This properly disposes of the action set and unsubscribes it from
+		// update events so that it doesn't do additional processing unnecessarily.
+		characterActions.Destroy();
+	}
+
     private void Start()
     {
         m_Character = GetComponent<Scr_Character>();
@@ -28,10 +43,10 @@ public class Scr_PlayerInput : MonoBehaviour {
     {
         if (!m_Jump)
         {
-            m_Jump = Input.GetAxis("Jump")>0.5f;
+			m_Jump = characterActions.jump.WasPressed;
         }
 
-		if (Input.GetKey(KeyCode.P)){
+		if (characterActions.menu.WasPressed){
 			Canvas.SetActive(true);
 			m_Character.Move(Vector3.zero, false, false);
 			GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -45,14 +60,16 @@ public class Scr_PlayerInput : MonoBehaviour {
     private void FixedUpdate()
     {
         // read inputs
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
+       // float h = Input.GetAxis("Horizontal");
+        //float v = Input.GetAxis("Vertical");
+		float h = characterActions.moveVector2.X;
+		float v = characterActions.moveVector2.Y;
         bool crouch = Input.GetKey(KeyCode.C);
 
 		// walk speed multiplier
-	    if (Input.GetKey(KeyCode.LeftShift)) m_Move *= 0.5f;
+	   // if (Input.GetKey(KeyCode.LeftShift)) m_Move *= 0.5f;
 
-        if(Swim){
+        if(Swim){  
 			// calculate camera relative direction to move while Swimming:
 			m_CamForward = cameraTarget.forward;	//übernimmt jegliche Richtungen von cameraTarget
   		    m_Move = v*m_CamForward + h*cameraTarget.right;

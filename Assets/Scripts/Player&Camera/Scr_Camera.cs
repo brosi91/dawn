@@ -17,6 +17,23 @@ public Transform Player;
 
 public Transform camera;
 
+private MyPlayerAction characterActions;
+
+
+	void OnEnable()
+	{
+		// See PlayerActions.cs for this setup.
+		characterActions = MyPlayerAction.CreateWithDefaultBindings();
+	}
+
+
+	void OnDisable()
+	{
+		// This properly disposes of the action set and unsubscribes it from
+		// update events so that it doesn't do additional processing unnecessarily.
+		characterActions.Destroy();
+	}
+
 	void Awake(){
 		//camera = GetComponentInChildren<Camera>().transform;
 		StartMaxDistance = MaxDistance;
@@ -55,7 +72,7 @@ public Transform camera;
 				camera.position = Vector3.MoveTowards(camera.position, target, LerpSpeed);
 			}
 
-		MaxDistance = Mathf.Clamp(MaxDistance-Input.GetAxis("Mouse ScrollWheel")*ZoomSpeed, MinDistance, StartMaxDistance);
+		MaxDistance = Mathf.Clamp(MaxDistance-(characterActions.lookZoomForward - characterActions.lookZoomBackward)*ZoomSpeed, MinDistance, StartMaxDistance);
 
 
 		// Rotation der Kamera um das Target
@@ -63,9 +80,9 @@ public Transform camera;
 		// Die Aktuelle Rotation in EulerAngles
 		Vector3 euler = transform.rotation.eulerAngles;
 		// Die Rotation um die Y Achse + der Mouse X Input
-		float LookX = euler.y + Input.GetAxis("Mouse X")* LookSpeed;
+		float LookX = euler.y + characterActions.lookVector2.X* LookSpeed;
 		// Die Rotation um die X Achse + der Mouse Y Input
-		float LookY = Mathf.Clamp( TrueAngle(euler.x - Input.GetAxis("Mouse Y")* LookSpeed), MinAngle, MaxAngle);
+		float LookY = Mathf.Clamp( TrueAngle(euler.x - characterActions.lookVector2.Y* LookSpeed), MinAngle, MaxAngle);
 		// Anwednung der zuvor definierten Werte auf die Rotation
 		transform.rotation = Quaternion.Euler(LookY, LookX, 0);
 	}

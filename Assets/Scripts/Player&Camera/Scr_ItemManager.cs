@@ -9,10 +9,11 @@ public class Scr_ItemManager : MonoBehaviour {
 
 
     // Die Tasten für Aktionen mit Hand oder Laterne
-    public KeyCode HandKey;
-    public KeyCode HandKeyXbox;
-    public KeyCode LanternKey;
-    public KeyCode LanternKeyXbox;
+    //public KeyCode HandKey;
+  	//public KeyCode HandKeyXbox;
+   // public KeyCode LanternKey;
+   // public KeyCode LanternKeyXbox;
+   //wird jetzt via inControl geregelt
 
 
     // Die Zeitverzögerungen mit der Items aufgenommen oder abgelegt werden sollen.
@@ -60,11 +61,27 @@ public class Scr_ItemManager : MonoBehaviour {
     GameObject ActiveItemLantern;
 
 
+    private MyPlayerAction characterActions;
+
     void Awake(){
 
     	ani = GetComponent<Animator>();
 
     }
+
+	void OnEnable()
+	{
+		// See PlayerActions.cs for this setup.
+		characterActions = MyPlayerAction.CreateWithDefaultBindings();
+	}
+
+
+	void OnDisable()
+	{
+		// This properly disposes of the action set and unsubscribes it from
+		// update events so that it doesn't do additional processing unnecessarily.
+		characterActions.Destroy();
+	}
     
 	// Im Update fragen wir die beiden Tasten ab, die für eine Aktion mit der Hand oder der Laterne stehen.
     // Wenn wir feststellen, dass ein Item zum Aufnehmen bereit steht starten wir die PickUp-Coroutine.
@@ -73,7 +90,7 @@ public class Scr_ItemManager : MonoBehaviour {
     // Wenn es nichts zum aufnehmen gibt, legen wir stattdessen ein Item ab.
 
 	void Update () {
-        if (Input.GetKeyDown(HandKey) || Input.GetKeyDown(HandKeyXbox)) {
+		if (characterActions.interact2.WasPressed) {
             if (ActiveItemHand != null)
             {
             	if(counterJelly <1){
@@ -94,7 +111,7 @@ public class Scr_ItemManager : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown(LanternKey) || Input.GetKeyDown(LanternKeyXbox)) {
+		if (characterActions.interact1.WasPressed) {
 			if (ActiveItemLantern != null && InLantern.Count < 3) {
 
 				ani.SetTrigger("GrabLeft");
