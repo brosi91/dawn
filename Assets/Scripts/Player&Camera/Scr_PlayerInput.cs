@@ -84,6 +84,8 @@ public class Scr_PlayerInput : MonoBehaviour {
 			m_Character.Move(m_Move, crouch, m_Jump);
         }
 
+		Debug.Log ("h: " + h + ", v: " + v);
+
         m_Jump = false;
     }
 
