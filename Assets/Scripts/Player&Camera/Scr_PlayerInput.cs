@@ -15,7 +15,7 @@ public class Scr_PlayerInput : MonoBehaviour {
 
 
 	//UI shizzle
-    public GameObject Canvas;
+    public GameObject MainMenuCanvas;
 
     private MyPlayerAction characterActions;
 
@@ -47,10 +47,8 @@ public class Scr_PlayerInput : MonoBehaviour {
         }
 
 		if (characterActions.menu.WasPressed){
-			Canvas.SetActive(true);
-			m_Character.Move(Vector3.zero, false, false);
-			GetComponent<Rigidbody>().velocity = Vector3.zero;
-			ToggleActive();
+			MainMenuCanvas.SetActive(true);
+			TurnOff();
 		}
 
     }
@@ -110,5 +108,14 @@ public class Scr_PlayerInput : MonoBehaviour {
 
     public void ToggleActive(){
 		enabled = !enabled;
+    }
+
+    public void TurnOff(){
+
+		m_Character.Move(Vector3.zero, false, false);
+		GetComponent<Rigidbody>().velocity = Vector3.zero;
+		GetComponent<Animator>().SetFloat("Forward", 0);
+		ToggleActive();
+
     }
 }

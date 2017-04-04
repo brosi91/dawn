@@ -60,12 +60,25 @@ public class Scr_ItemManager : MonoBehaviour {
     GameObject ActiveItemHand;
     GameObject ActiveItemLantern;
 
-
+    //inControl inputs
     private MyPlayerAction characterActions;
+
+    //für LanternGui
+	public GameObject LanternItem1;
+	public GameObject LanternItem2;
+	public GameObject LanternItem3;
+
+	//für Sonne
+	public GameObject Sun;
+	public Camera camPlayer;
+	public Camera camSun;
+
 
     void Awake(){
 
     	ani = GetComponent<Animator>();
+		camPlayer.enabled = true;
+		camSun.enabled = false;
 
     }
 
@@ -206,6 +219,10 @@ public class Scr_ItemManager : MonoBehaviour {
 			ani.SetLayerWeight(3, weight - handDownSpeed);
 		}
 
+		LanternItem1.SetActive(InLantern.Count >=1);
+		LanternItem2.SetActive(InLantern.Count >= 2);
+		LanternItem3.SetActive(InLantern.Count >= 3);
+
 	}
 
 
@@ -246,6 +263,19 @@ public class Scr_ItemManager : MonoBehaviour {
             doubleLight = other.GetComponentInParent<Scr_DoubleLightSource>();
 			ContainItem = other.GetComponent<Scr_ContainItem> ();
         }
+
+		else if( other.tag == "Sun"){
+
+			GetComponent<Scr_PlayerInput>().TurnOff();
+			Sun.GetComponent<Scr_Sunrise>().enabled = true;
+			camPlayer.tag = "Untagged";
+			camSun.tag = "MainCamera";
+			camPlayer.enabled = false;
+			camSun.enabled = true;
+
+
+		}
+
         Debug.Log("enter " + other.tag);
 
     }
@@ -287,6 +317,7 @@ public class Scr_ItemManager : MonoBehaviour {
 			Goal = null;
 
 		}
+
         Debug.Log("leave " + other.tag);
     }
 
@@ -418,5 +449,4 @@ public class Scr_ItemManager : MonoBehaviour {
 			InLantern.RemoveAt(0);
 		}
 	}
-
 }
