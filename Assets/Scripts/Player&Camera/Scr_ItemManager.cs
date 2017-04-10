@@ -231,7 +231,7 @@ public class Scr_ItemManager : MonoBehaviour {
     // Auf dieses aktive Item greifen wir zu wenn wir dann eine Taste drücken.
     // In OnTriggerExit wird das ActiveItem wieder null gesetzt und es gibt nichts mehr zum Aufnehmen.
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if (other.tag == "ItemHand") {
             ActiveItemHand = other.gameObject;
