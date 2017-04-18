@@ -7,6 +7,7 @@ public class Scr_Jellyfish : MonoBehaviour {
 	public Rigidbody Root;
 	public Rigidbody Top;
 
+
 	public float TopRiseSpeed;
 
 	private float LocalHeight;
@@ -42,7 +43,7 @@ public class Scr_Jellyfish : MonoBehaviour {
 
         if (Hand != null )
         {
-            Root.transform.position = Hand.position;
+			Root.transform.position = Hand.position;
             WordHeight = Hand.position.y + LocalHeight;
             // FixedJoint  joint = gameObject.AddComponent<FixedJoint>();
             //joint.connectedBody = Hand.GetComponent<Rigidbody>();
@@ -59,7 +60,7 @@ public class Scr_Jellyfish : MonoBehaviour {
             RaycastHit hit;
             Vector3 target;
 
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit))
+            if (Physics.Raycast(transform.position, Vector3.down, out hit))
             {
                 if (hit.distance > MaxDistance) {
                     Root.transform.position += Vector3.down * sinkSpeed * Time.deltaTime;

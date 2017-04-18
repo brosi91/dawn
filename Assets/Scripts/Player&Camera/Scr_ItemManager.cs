@@ -273,7 +273,6 @@ public class Scr_ItemManager : MonoBehaviour {
 			camPlayer.enabled = false;
 			camSun.enabled = true;
 
-
 		}
 
         Debug.Log("enter " + other.tag);
@@ -378,6 +377,8 @@ public class Scr_ItemManager : MonoBehaviour {
     void WorldToLantern(GameObject item) {
 		InLantern.Add(ActiveItemLantern);
 
+		item.GetComponentInChildren<Animator>().SetBool("WithinLantern", true);
+		item.GetComponentInChildren<Animator>().SetBool("WithinGoal", false);
         item.tag = "Untagged";
         item.transform.parent = Lantern;
         item.transform.position = Lantern.position;
@@ -406,6 +407,8 @@ public class Scr_ItemManager : MonoBehaviour {
     }
 
     void LanternToWorld(GameObject item) {
+		item.GetComponentInChildren<Animator>().SetBool("WithinLantern", false);
+		item.GetComponentInChildren<Animator>().SetBool("WithinGoal", false);
         item.tag = "ItemLantern";
         item.GetComponent<SphereCollider>().enabled = true;
         item.transform.parent = null;
@@ -416,6 +419,8 @@ public class Scr_ItemManager : MonoBehaviour {
 
 	void LanternToLight(GameObject item){
 		if (item.GetComponent<Scr_Firefly> () != null && ContainItem.containItemCount < 1) {
+			item.GetComponentInChildren<Animator>().SetBool("WithinLantern", false);
+			item.GetComponentInChildren<Animator>().SetBool("WithinGoal", true);
 			Firefly = item.GetComponent<Scr_Firefly>();
 			item.GetComponent<SphereCollider> ().enabled = true;
 			item.tag = "ItemLantern";
@@ -433,6 +438,8 @@ public class Scr_ItemManager : MonoBehaviour {
 
 	void LanternToDoubleLight(GameObject item){
 		if (item.GetComponent<Scr_Firefly> () != null && ContainItem.containItemCount < 1) {
+			item.GetComponentInChildren<Animator>().SetBool("WithinLantern", false);
+			item.GetComponentInChildren<Animator>().SetBool("WithinGoal", true);
 			Firefly = item.GetComponent<Scr_Firefly>();
 			item.GetComponent<SphereCollider> ().enabled = true;
 			item.tag = "ItemLantern";
