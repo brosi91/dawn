@@ -68,6 +68,17 @@ public class Scr_ItemManager : MonoBehaviour {
 	public GameObject LanternItem2;
 	public GameObject LanternItem3;
 
+	//für Laterne texturenwechsel
+	public Material matLantern;
+	public GameObject objLantern;
+	public Texture lanternTexture00;
+	public Texture lanternTexture01;
+	public Texture lanternTexture02;
+	public Texture lanternTexture03;
+
+	private Renderer rend;
+
+
 	//für Sonne
 	public GameObject Sun;
 	public Camera camPlayer;
@@ -79,6 +90,8 @@ public class Scr_ItemManager : MonoBehaviour {
     	ani = GetComponent<Animator>();
 		camPlayer.enabled = true;
 		camSun.enabled = false;
+
+		rend = objLantern.GetComponent<Renderer>();
 
     }
 
@@ -217,6 +230,23 @@ public class Scr_ItemManager : MonoBehaviour {
 		}
 		else if (handHolding == false && weight >0){
 			ani.SetLayerWeight(3, weight - handDownSpeed);
+		}
+
+
+
+		switch (InLantern.Count){
+			case 1:
+				rend.material.mainTexture = lanternTexture01;
+				break;
+			case 2:
+				rend.material.mainTexture = lanternTexture02;
+				break;
+			case 3:
+				rend.material.mainTexture = lanternTexture03;
+				break;
+			default:
+				rend.material.mainTexture = lanternTexture00;
+				break;
 		}
 
 		LanternItem1.SetActive(InLantern.Count >=1);
@@ -380,6 +410,7 @@ public class Scr_ItemManager : MonoBehaviour {
 		item.GetComponentInChildren<Animator>().SetBool("WithinLantern", true);
 		item.GetComponentInChildren<Animator>().SetBool("WithinGoal", false);
         item.tag = "Untagged";
+        item.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
         item.transform.parent = Lantern;
         item.transform.position = Lantern.position;
         item.GetComponent<SphereCollider>().enabled = false;
@@ -409,9 +440,11 @@ public class Scr_ItemManager : MonoBehaviour {
     void LanternToWorld(GameObject item) {
 		item.GetComponentInChildren<Animator>().SetBool("WithinLantern", false);
 		item.GetComponentInChildren<Animator>().SetBool("WithinGoal", false);
+		item.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
         item.tag = "ItemLantern";
         item.GetComponent<SphereCollider>().enabled = true;
         item.transform.parent = null;
+        item.transform.rotation = Quaternion.identity;
 		InLantern.RemoveAt(0);
 
 		Debug.Log ("parent removed");
@@ -421,6 +454,7 @@ public class Scr_ItemManager : MonoBehaviour {
 		if (item.GetComponent<Scr_Firefly> () != null && ContainItem.containItemCount < 1) {
 			item.GetComponentInChildren<Animator>().SetBool("WithinLantern", false);
 			item.GetComponentInChildren<Animator>().SetBool("WithinGoal", true);
+			item.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
 			Firefly = item.GetComponent<Scr_Firefly>();
 			item.GetComponent<SphereCollider> ().enabled = true;
 			item.tag = "ItemLantern";
@@ -432,6 +466,7 @@ public class Scr_ItemManager : MonoBehaviour {
 			//GoalRemove = true;
 			Firefly.inGoal = true;
 			ContainItem.containItemCount += 1;
+			item.transform.rotation = Quaternion.identity;
 			InLantern.RemoveAt(0);
 		}
 	}
@@ -440,6 +475,7 @@ public class Scr_ItemManager : MonoBehaviour {
 		if (item.GetComponent<Scr_Firefly> () != null && ContainItem.containItemCount < 1) {
 			item.GetComponentInChildren<Animator>().SetBool("WithinLantern", false);
 			item.GetComponentInChildren<Animator>().SetBool("WithinGoal", true);
+			item.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
 			Firefly = item.GetComponent<Scr_Firefly>();
 			item.GetComponent<SphereCollider> ().enabled = true;
 			item.tag = "ItemLantern";
@@ -453,6 +489,7 @@ public class Scr_ItemManager : MonoBehaviour {
 			Debug.Log("Counter++: " + doubleLight.counter);
 			doubleLight.DoubleOnOff ();
 			ContainItem.containItemCount += 1;
+			item.transform.rotation = Quaternion.identity;
 			InLantern.RemoveAt(0);
 		}
 	}

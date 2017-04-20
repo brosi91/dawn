@@ -68,9 +68,22 @@ public class Scr_PlayerInput : MonoBehaviour {
 	   // if (Input.GetKey(KeyCode.LeftShift)) m_Move *= 0.5f;
 
         if(Swim){  
+        	float rise = 0;
+        	if (crouch){
+				rise = -1f;
+        	}
+			else if (characterActions.jump.IsPressed){
+				rise = 1f;
+			}
+
 			// calculate camera relative direction to move while Swimming:
 			m_CamForward = cameraTarget.forward;	//übernimmt jegliche Richtungen von cameraTarget
-  		    m_Move = v*m_CamForward + h*cameraTarget.right;
+  		    if (rise != 0){
+				m_Move = (v*m_CamForward + h*cameraTarget.right + Vector3.up* rise).normalized;
+  		    }
+  		    else{
+				m_Move = v*m_CamForward + h*cameraTarget.right;
+  		    }
 
 			// pass all parameters to the character control script
         	m_Character.Swim(m_Move);

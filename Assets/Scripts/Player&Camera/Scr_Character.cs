@@ -233,6 +233,14 @@ public class Scr_Character : MonoBehaviour {
 			//wenn input, zielrotation ist richtung (move), langsam rotieren bis zu (target)
 			Quaternion target = Quaternion.LookRotation(move);
 			transform.rotation = Quaternion.RotateTowards(transform.rotation, target, SwimTurnSpeed);
+			// Making Sure the Up Angle isn't weird
+			if (PositiveAngles(transform.eulerAngles.x) < 340f && PositiveAngles(transform.eulerAngles.x) > 260f){
+				float newAngle = 340f;
+				if (PositiveAngles(transform.eulerAngles.x) < 300){
+					newAngle = 260f;
+				}
+				transform.rotation = Quaternion.Euler ( newAngle, transform.eulerAngles.y, transform.eulerAngles.z);
+			}
 		}
 		m_Animator.SetFloat("SwimSpeed", move.magnitude);
 
@@ -257,6 +265,15 @@ public class Scr_Character : MonoBehaviour {
 
 	public void DolphinJump(Vector3 direction){
 		m_Rigidbody.AddForce(direction*DolphinForce* Mathf.Clamp01(direction.y));
+	}
+
+	float PositiveAngles(float angle){
+		if (angle < 0){
+			return angle +360f;
+		}
+		else{
+			return angle;
+		}
 	}
 
 }
