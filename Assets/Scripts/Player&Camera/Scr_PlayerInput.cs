@@ -44,7 +44,9 @@ public class Scr_PlayerInput : MonoBehaviour {
         if (!m_Jump)
         {
 			m_Jump = characterActions.jump.WasPressed;
+	
         }
+
 
 		if (characterActions.menu.WasPressed){
 			MainMenuCanvas.SetActive(true);
