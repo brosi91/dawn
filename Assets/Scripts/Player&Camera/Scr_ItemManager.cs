@@ -406,11 +406,11 @@ public class Scr_ItemManager : MonoBehaviour {
 
     void WorldToLantern(GameObject item) {
 		InLantern.Add(ActiveItemLantern);
-
 		item.GetComponentInChildren<Animator>().SetBool("WithinLantern", true);
 		item.GetComponentInChildren<Animator>().SetBool("WithinGoal", false);
         item.tag = "Untagged";
         item.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
+        item.GetComponentInChildren<ParticleSystem>().Stop();
         item.transform.parent = Lantern;
         item.transform.position = Lantern.position;
         item.GetComponent<SphereCollider>().enabled = false;
@@ -441,6 +441,7 @@ public class Scr_ItemManager : MonoBehaviour {
 		item.GetComponentInChildren<Animator>().SetBool("WithinLantern", false);
 		item.GetComponentInChildren<Animator>().SetBool("WithinGoal", false);
 		item.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
+		item.GetComponentInChildren<ParticleSystem>().Play();
         item.tag = "ItemLantern";
         item.GetComponent<SphereCollider>().enabled = true;
         item.transform.parent = null;
@@ -455,6 +456,7 @@ public class Scr_ItemManager : MonoBehaviour {
 			item.GetComponentInChildren<Animator>().SetBool("WithinLantern", false);
 			item.GetComponentInChildren<Animator>().SetBool("WithinGoal", true);
 			item.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
+			item.GetComponentInChildren<ParticleSystem>().Play();
 			Firefly = item.GetComponent<Scr_Firefly>();
 			item.GetComponent<SphereCollider> ().enabled = true;
 			item.tag = "ItemLantern";
@@ -476,6 +478,7 @@ public class Scr_ItemManager : MonoBehaviour {
 			item.GetComponentInChildren<Animator>().SetBool("WithinLantern", false);
 			item.GetComponentInChildren<Animator>().SetBool("WithinGoal", true);
 			item.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
+			item.GetComponentInChildren<ParticleSystem>().Play();
 			Firefly = item.GetComponent<Scr_Firefly>();
 			item.GetComponent<SphereCollider> ().enabled = true;
 			item.tag = "ItemLantern";

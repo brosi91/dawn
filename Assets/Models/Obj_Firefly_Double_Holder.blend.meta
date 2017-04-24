@@ -1,0 +1,617 @@
+fileFormatVersion: 2
+guid: f4810906f04b648b4889ce30bafe6605
+timeCreated: 1493027455
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Armature
+    100002: Leaf_Flower_Root
+    100004: Leaf_Flower_Root_NoMotionForShit
+    100006: Leaf_Inner_High_01
+    100008: Leaf_Inner_High_01_001
+    100010: Leaf_Inner_High_02
+    100012: Leaf_Inner_High_02_001
+    100014: Leaf_Inner_High_03
+    100016: Leaf_Inner_High_03_001
+    100018: Leaf_Inner_High_04
+    100020: Leaf_Inner_High_04_001
+    100022: Leaf_Inner_Low_01
+    100024: Leaf_Inner_Low_02
+    100026: Leaf_Inner_Low_03
+    100028: Leaf_Inner_Low_04
+    100030: Leaf_Mid_High_01
+    100032: Leaf_Mid_High_01_001
+    100034: Leaf_Mid_High_02
+    100036: Leaf_Mid_High_02_001
+    100038: Leaf_Mid_High_03
+    100040: Leaf_Mid_High_03_001
+    100042: Leaf_Mid_High_04
+    100044: Leaf_Mid_High_04_001
+    100046: Leaf_Mid_Low_01
+    100048: Leaf_Mid_Low_02
+    100050: Leaf_Mid_Low_03
+    100052: Leaf_Mid_Low_04
+    100054: Leaf_Out_01
+    100056: Leaf_Out_01_001
+    100058: Leaf_Out_01_002
+    100060: Leaf_Outer_02
+    100062: Leaf_Outer_02_001
+    100064: Leaf_Outer_02_002
+    100066: Leaf_Outer_03
+    100068: Leaf_Outer_03_001
+    100070: Leaf_Outer_03_002
+    100072: Leaf_Outer_04
+    100074: Leaf_Outer_04_001
+    100076: Leaf_Outer_04_002
+    100078: //RootNode
+    100080: Obj_JellyfishFlower_01
+    100082: Obj_JellyfishHoder_01
+    400000: Armature
+    400002: Leaf_Flower_Root
+    400004: Leaf_Flower_Root_NoMotionForShit
+    400006: Leaf_Inner_High_01
+    400008: Leaf_Inner_High_01_001
+    400010: Leaf_Inner_High_02
+    400012: Leaf_Inner_High_02_001
+    400014: Leaf_Inner_High_03
+    400016: Leaf_Inner_High_03_001
+    400018: Leaf_Inner_High_04
+    400020: Leaf_Inner_High_04_001
+    400022: Leaf_Inner_Low_01
+    400024: Leaf_Inner_Low_02
+    400026: Leaf_Inner_Low_03
+    400028: Leaf_Inner_Low_04
+    400030: Leaf_Mid_High_01
+    400032: Leaf_Mid_High_01_001
+    400034: Leaf_Mid_High_02
+    400036: Leaf_Mid_High_02_001
+    400038: Leaf_Mid_High_03
+    400040: Leaf_Mid_High_03_001
+    400042: Leaf_Mid_High_04
+    400044: Leaf_Mid_High_04_001
+    400046: Leaf_Mid_Low_01
+    400048: Leaf_Mid_Low_02
+    400050: Leaf_Mid_Low_03
+    400052: Leaf_Mid_Low_04
+    400054: Leaf_Out_01
+    400056: Leaf_Out_01_001
+    400058: Leaf_Out_01_002
+    400060: Leaf_Outer_02
+    400062: Leaf_Outer_02_001
+    400064: Leaf_Outer_02_002
+    400066: Leaf_Outer_03
+    400068: Leaf_Outer_03_001
+    400070: Leaf_Outer_03_002
+    400072: Leaf_Outer_04
+    400074: Leaf_Outer_04_001
+    400076: Leaf_Outer_04_002
+    400078: //RootNode
+    400080: Obj_JellyfishFlower_01
+    400082: Obj_JellyfishHoder_01
+    2300000: Obj_JellyfishHoder_01
+    3300000: Obj_JellyfishHoder_01
+    4300000: Obj_JellyfishFlower_01
+    4300002: Obj_JellyfishHoder_01
+    7400000: Default Take
+    7400002: Ani_Flower_double_Closed_Idle
+    7400004: Ani_Flower_double_Open
+    7400006: Ani_Flower_double_Open_Idle
+    9500000: //RootNode
+    13700000: Obj_JellyfishFlower_01
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Default Take
+      takeName: Default Take
+      firstFrame: 0
+      lastFrame: 19
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Leaf_Flower_Root
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_01
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_01/Leaf_Inner_High_01
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_01/Leaf_Inner_High_01/Leaf_Inner_High_01_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_02
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_02/Leaf_Inner_High_02
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_02/Leaf_Inner_High_02/Leaf_Inner_High_02_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_03
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_03/Leaf_Inner_High_03
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_03/Leaf_Inner_High_03/Leaf_Inner_High_03_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_04
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_04/Leaf_Inner_High_04
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_04/Leaf_Inner_High_04/Leaf_Inner_High_04_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_01
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_01/Leaf_Mid_High_01
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_01/Leaf_Mid_High_01/Leaf_Mid_High_01_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_02
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_02/Leaf_Mid_High_02
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_02/Leaf_Mid_High_02/Leaf_Mid_High_02_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_03
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_03/Leaf_Mid_High_03
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_03/Leaf_Mid_High_03/Leaf_Mid_High_03_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_04
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_04/Leaf_Mid_High_04
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_04/Leaf_Mid_High_04/Leaf_Mid_High_04_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Out_01
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Out_01/Leaf_Out_01_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Out_01/Leaf_Out_01_001/Leaf_Out_01_002
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_02
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_02/Leaf_Outer_02_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_02/Leaf_Outer_02_001/Leaf_Outer_02_002
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_03
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_03/Leaf_Outer_03_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_03/Leaf_Outer_03_001/Leaf_Outer_03_002
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_04
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_04/Leaf_Outer_04_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_04/Leaf_Outer_04_001/Leaf_Outer_04_002
+        weight: 1
+      - path: Armature/Leaf_Flower_Root_NoMotionForShit
+        weight: 1
+      - path: Obj_JellyfishFlower_01
+        weight: 1
+      - path: Obj_JellyfishHoder_01
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Ani_Flower_double_Closed_Idle
+      takeName: Ani_Flower_Closed_Idle
+      firstFrame: -1
+      lastFrame: 29
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Leaf_Flower_Root
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_01
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_01/Leaf_Inner_High_01
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_01/Leaf_Inner_High_01/Leaf_Inner_High_01_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_02
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_02/Leaf_Inner_High_02
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_02/Leaf_Inner_High_02/Leaf_Inner_High_02_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_03
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_03/Leaf_Inner_High_03
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_03/Leaf_Inner_High_03/Leaf_Inner_High_03_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_04
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_04/Leaf_Inner_High_04
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_04/Leaf_Inner_High_04/Leaf_Inner_High_04_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_01
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_01/Leaf_Mid_High_01
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_01/Leaf_Mid_High_01/Leaf_Mid_High_01_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_02
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_02/Leaf_Mid_High_02
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_02/Leaf_Mid_High_02/Leaf_Mid_High_02_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_03
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_03/Leaf_Mid_High_03
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_03/Leaf_Mid_High_03/Leaf_Mid_High_03_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_04
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_04/Leaf_Mid_High_04
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_04/Leaf_Mid_High_04/Leaf_Mid_High_04_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Out_01
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Out_01/Leaf_Out_01_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Out_01/Leaf_Out_01_001/Leaf_Out_01_002
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_02
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_02/Leaf_Outer_02_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_02/Leaf_Outer_02_001/Leaf_Outer_02_002
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_03
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_03/Leaf_Outer_03_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_03/Leaf_Outer_03_001/Leaf_Outer_03_002
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_04
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_04/Leaf_Outer_04_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_04/Leaf_Outer_04_001/Leaf_Outer_04_002
+        weight: 1
+      - path: Armature/Leaf_Flower_Root_NoMotionForShit
+        weight: 1
+      - path: Obj_JellyfishFlower_01
+        weight: 1
+      - path: Obj_JellyfishHoder_01
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Ani_Flower_double_Open
+      takeName: Ani_Flower_Open
+      firstFrame: -1
+      lastFrame: 19
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Leaf_Flower_Root
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_01
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_01/Leaf_Inner_High_01
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_01/Leaf_Inner_High_01/Leaf_Inner_High_01_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_02
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_02/Leaf_Inner_High_02
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_02/Leaf_Inner_High_02/Leaf_Inner_High_02_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_03
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_03/Leaf_Inner_High_03
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_03/Leaf_Inner_High_03/Leaf_Inner_High_03_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_04
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_04/Leaf_Inner_High_04
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_04/Leaf_Inner_High_04/Leaf_Inner_High_04_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_01
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_01/Leaf_Mid_High_01
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_01/Leaf_Mid_High_01/Leaf_Mid_High_01_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_02
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_02/Leaf_Mid_High_02
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_02/Leaf_Mid_High_02/Leaf_Mid_High_02_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_03
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_03/Leaf_Mid_High_03
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_03/Leaf_Mid_High_03/Leaf_Mid_High_03_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_04
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_04/Leaf_Mid_High_04
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_04/Leaf_Mid_High_04/Leaf_Mid_High_04_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Out_01
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Out_01/Leaf_Out_01_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Out_01/Leaf_Out_01_001/Leaf_Out_01_002
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_02
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_02/Leaf_Outer_02_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_02/Leaf_Outer_02_001/Leaf_Outer_02_002
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_03
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_03/Leaf_Outer_03_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_03/Leaf_Outer_03_001/Leaf_Outer_03_002
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_04
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_04/Leaf_Outer_04_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_04/Leaf_Outer_04_001/Leaf_Outer_04_002
+        weight: 1
+      - path: Armature/Leaf_Flower_Root_NoMotionForShit
+        weight: 1
+      - path: Obj_JellyfishFlower_01
+        weight: 1
+      - path: Obj_JellyfishHoder_01
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Ani_Flower_double_Open_Idle
+      takeName: Ani_Flower_Open_Idle
+      firstFrame: -1
+      lastFrame: 29
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Leaf_Flower_Root
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_01
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_01/Leaf_Inner_High_01
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_01/Leaf_Inner_High_01/Leaf_Inner_High_01_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_02
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_02/Leaf_Inner_High_02
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_02/Leaf_Inner_High_02/Leaf_Inner_High_02_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_03
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_03/Leaf_Inner_High_03
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_03/Leaf_Inner_High_03/Leaf_Inner_High_03_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_04
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_04/Leaf_Inner_High_04
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Inner_Low_04/Leaf_Inner_High_04/Leaf_Inner_High_04_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_01
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_01/Leaf_Mid_High_01
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_01/Leaf_Mid_High_01/Leaf_Mid_High_01_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_02
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_02/Leaf_Mid_High_02
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_02/Leaf_Mid_High_02/Leaf_Mid_High_02_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_03
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_03/Leaf_Mid_High_03
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_03/Leaf_Mid_High_03/Leaf_Mid_High_03_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_04
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_04/Leaf_Mid_High_04
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Mid_Low_04/Leaf_Mid_High_04/Leaf_Mid_High_04_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Out_01
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Out_01/Leaf_Out_01_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Out_01/Leaf_Out_01_001/Leaf_Out_01_002
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_02
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_02/Leaf_Outer_02_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_02/Leaf_Outer_02_001/Leaf_Outer_02_002
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_03
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_03/Leaf_Outer_03_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_03/Leaf_Outer_03_001/Leaf_Outer_03_002
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_04
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_04/Leaf_Outer_04_001
+        weight: 1
+      - path: Armature/Leaf_Flower_Root/Leaf_Outer_04/Leaf_Outer_04_001/Leaf_Outer_04_002
+        weight: 1
+      - path: Armature/Leaf_Flower_Root_NoMotionForShit
+        weight: 1
+      - path: Obj_JellyfishFlower_01
+        weight: 1
+      - path: Obj_JellyfishHoder_01
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

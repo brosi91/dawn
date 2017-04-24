@@ -32,7 +32,10 @@ public class Scr_Character : MonoBehaviour {
 	CapsuleCollider m_Capsule;
 	bool m_Crouching;
 
+	bool landed = true;
+
 	public AudioClip[] JumpSounds;
+	public AudioClip[] LandSounds;
 
 
 	void Start()
@@ -178,6 +181,7 @@ public class Scr_Character : MonoBehaviour {
 			// jump!
 			m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, m_JumpPower, m_Rigidbody.velocity.z);
 			m_IsGrounded = false;
+			landed = false;
 			Scr_Soundmanager.Sound.Play(JumpSounds[Random.Range(0,JumpSounds.Length)], gameObject, 0.3f, 0.4f);
 			m_Animator.applyRootMotion = false;
 			m_GroundCheckDistance = 0.1f;
@@ -217,6 +221,10 @@ public class Scr_Character : MonoBehaviour {
 		{
 			m_GroundNormal = hitInfo.normal;
 			m_IsGrounded = true;
+			if(landed == false){
+				Scr_Soundmanager.Sound.Play(LandSounds[Random.Range(0,LandSounds.Length)], gameObject, 0.3f, 0.4f);
+				landed = true;
+			}
 			m_Animator.applyRootMotion = true;
 		}
 		else
