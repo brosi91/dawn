@@ -238,6 +238,7 @@ public class Scr_Character : MonoBehaviour {
 	public void Swim(Vector3 move){
 
 		m_Rigidbody.MovePosition(transform.position+move* SwimSpeed);
+		landed = false;
 
 		//ist input da?
 		if(move.magnitude>0){

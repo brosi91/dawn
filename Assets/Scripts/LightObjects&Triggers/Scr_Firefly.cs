@@ -8,16 +8,23 @@ public class Scr_Firefly : MonoBehaviour {
 	public bool inGoal;
 	public bool inDouble;
 
+
+	private AudioSource Idle;
+
 	void Awake(){
 		inGoal = false;
 		inDouble = false;
+		Idle = GetComponentInChildren<AudioSource>();
 	}
 
-	/*public void FireflyToGoal() {
-		if (Goal != null)
-		{
-			transform.position = Goal.position;
+	public void PlayMusic(){
 
+		if (Idle.isPlaying){
+			Idle.Stop();
 		}
-	}*/
+		else {
+			Idle.Play();
+		}
+
+	}
 }

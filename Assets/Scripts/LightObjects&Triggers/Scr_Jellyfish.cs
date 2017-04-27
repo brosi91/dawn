@@ -21,6 +21,8 @@ public class Scr_Jellyfish : MonoBehaviour {
 
     public bool inGoal;
 
+   	public AudioClip JellyfishIdle;
+
   //  public GameObject LightJelly;
 
 

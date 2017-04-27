@@ -28,7 +28,7 @@ public class Scr_Foodsteps : MonoBehaviour {
 		}
 
 		else if (footHeightL && inputScr.Swim == false){
-			Scr_Soundmanager.Sound.Play(footSteps[Random.Range(0,footSteps.Length)], gameObject, 0.5f, 0.7f, 0.9f, 1.1f);
+			Scr_Soundmanager.Sound.Play(footSteps[Random.Range(0,footSteps.Length)], gameObject, 0.3f, 0.5f, 0.9f, 1.1f);
 			footHeightL = false;
 		}
 
@@ -37,7 +37,7 @@ public class Scr_Foodsteps : MonoBehaviour {
 		}
 
 		else if (footHeightR && inputScr.Swim == false){
-			Scr_Soundmanager.Sound.Play(footSteps[Random.Range(0,footSteps.Length)], gameObject, 0.5f, 0.7f, 0.9f, 1.1f);
+			Scr_Soundmanager.Sound.Play(footSteps[Random.Range(0,footSteps.Length)], gameObject, 0.3f, 0.5f, 0.9f, 1.1f);
 			footHeightR = false;
 		}
 	}

@@ -85,6 +85,14 @@ public class Scr_ItemManager : MonoBehaviour {
 	public Camera camSun;
 
 
+	//Audio
+	public AudioClip[] PickUpJelly;
+	public AudioClip[] DropJelly;
+	public AudioClip[] PickUpFirefly;
+	public AudioClip[] DropFirefly;
+
+
+
     void Awake(){
 
     	ani = GetComponent<Animator>();
@@ -305,7 +313,6 @@ public class Scr_ItemManager : MonoBehaviour {
 
 		}
 
-        Debug.Log("enter " + other.tag);
 
     }
 
@@ -347,7 +354,6 @@ public class Scr_ItemManager : MonoBehaviour {
 
 		}
 
-        Debug.Log("leave " + other.tag);
     }
 
 
@@ -369,6 +375,7 @@ public class Scr_ItemManager : MonoBehaviour {
 				ContainItem.containItemCount -= 1;
 			}
 			counterJelly++;
+			Scr_Soundmanager.Sound.Play(PickUpJelly[Random.Range(0,PickUpJelly.Length)], gameObject, 0.3f, 0.5f, 0.8f, 1.2f);
 		}
     }
     void HandToWorld(GameObject item) {
@@ -384,13 +391,13 @@ public class Scr_ItemManager : MonoBehaviour {
 			item.GetComponent<Rigidbody> ().velocity = Vector3.zero; //für letztes child
 			item.GetComponent<Rigidbody> ().angularVelocity = Vector3.zero; 
 			counterJelly--;
+			Scr_Soundmanager.Sound.Play(DropJelly[Random.Range(0,DropJelly.Length)], gameObject, 0.3f, 0.5f, 0.8f, 1.2f);
 		}
     }
 
     void HandToLight(GameObject item) {
 		if (item.GetComponent<Scr_Jellyfish> () != null && ContainItem.containItemCount < 1 && counterJelly > 0) {
 			Jellyfish = item.GetComponent<Scr_Jellyfish> ();
-			Debug.Log ("Jelly true");
 			item.tag = "ItemHand";
 			Jellyfish.Hand = null;
 			Jellyfish.Goal = Goal;
@@ -401,10 +408,12 @@ public class Scr_ItemManager : MonoBehaviour {
 			Jellyfish.inGoal = true;
 			ContainItem.containItemCount += 1;
 			counterJelly--;
+			Scr_Soundmanager.Sound.Play(DropJelly[Random.Range(0,DropJelly.Length)], gameObject, 0.3f, 0.5f, 0.8f, 1.2f);
 		}
     }
 
     void WorldToLantern(GameObject item) {
+		Firefly = item.GetComponent<Scr_Firefly> ();
 		InLantern.Add(ActiveItemLantern);
 		item.GetComponentInChildren<Animator>().SetBool("WithinLantern", true);
 		item.GetComponentInChildren<Animator>().SetBool("WithinGoal", false);
@@ -414,30 +423,29 @@ public class Scr_ItemManager : MonoBehaviour {
         item.transform.parent = Lantern;
         item.transform.position = Lantern.position;
         item.GetComponent<SphereCollider>().enabled = false;
-		Debug.Log (" ich bin " + Firefly.inGoal);
+		Firefly.PlayMusic();
 		if (Firefly.inGoal && ContainItem.containItemCount > 0) {
-			Debug.Log ("in goal is true and containitem is bigger than 0");
 			if(Firefly.inDouble){
 				Firefly.inDouble = false;
 				doubleLight.counter -=1;
 				doubleLight.DoubleOnOff();
-				Debug.Log("Counter--: " + doubleLight.counter);
 			}
 			else{
 				triggerLight.SwitchLightOff ();
 			}
 			// stop swimming as soon as pick up
 			ContainItem.containItemCount -= 1;
-			Debug.Log("ItemCount--: " + ContainItem.containItemCount);
 			GetComponent<Scr_PlayerInput> ().DisableSwim ();
 			Firefly.inGoal = false; 
 		}
+		Scr_Soundmanager.Sound.Play(PickUpFirefly[Random.Range(0,PickUpFirefly.Length)], gameObject, 0.3f, 0.5f, 0.8f, 1.2f);
 
 		ActiveItemLantern = null;
 
     }
 
     void LanternToWorld(GameObject item) {
+		Firefly = item.GetComponent<Scr_Firefly> ();
 		item.GetComponentInChildren<Animator>().SetBool("WithinLantern", false);
 		item.GetComponentInChildren<Animator>().SetBool("WithinGoal", false);
 		item.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
@@ -447,8 +455,9 @@ public class Scr_ItemManager : MonoBehaviour {
         item.transform.parent = null;
         item.transform.rotation = Quaternion.identity;
 		InLantern.RemoveAt(0);
+		Scr_Soundmanager.Sound.Play(DropFirefly[Random.Range(0,DropFirefly.Length)], gameObject, 0.3f, 0.5f, 0.8f, 1.2f);
+		Firefly.PlayMusic();
 
-		Debug.Log ("parent removed");
     }
 
 	void LanternToLight(GameObject item){
@@ -470,6 +479,9 @@ public class Scr_ItemManager : MonoBehaviour {
 			ContainItem.containItemCount += 1;
 			item.transform.rotation = Quaternion.identity;
 			InLantern.RemoveAt(0);
+			Scr_Soundmanager.Sound.Play(DropFirefly[Random.Range(0,DropFirefly.Length)], gameObject, 0.3f, 0.5f, 0.8f, 1.2f);
+			Firefly.PlayMusic();
+
 		}
 	}
 
@@ -489,11 +501,13 @@ public class Scr_ItemManager : MonoBehaviour {
 			Firefly.inGoal = true;
 			Firefly.inDouble = true;
 			doubleLight.counter += 1;
-			Debug.Log("Counter++: " + doubleLight.counter);
 			doubleLight.DoubleOnOff ();
 			ContainItem.containItemCount += 1;
 			item.transform.rotation = Quaternion.identity;
 			InLantern.RemoveAt(0);
+			Scr_Soundmanager.Sound.Play(DropFirefly[Random.Range(0,DropFirefly.Length)], gameObject, 0.3f, 0.5f, 0.8f, 1.2f);
+			Firefly.PlayMusic();
+
 		}
 	}
 }
