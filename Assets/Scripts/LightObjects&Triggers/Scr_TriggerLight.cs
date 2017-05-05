@@ -22,6 +22,8 @@ public class Scr_TriggerLight : MonoBehaviour {
     float startalpha;
     float startIntensity;
 
+    //Audio
+	public AudioClip[] Stingers;
 
     void Awake() {
     	if( light == null){
@@ -58,6 +60,7 @@ public class Scr_TriggerLight : MonoBehaviour {
 		foreach (ParticleSystem ps in Particles) {
 			ps.Play();
 		}
+		Scr_Soundmanager.Sound.Play(Stingers[Random.Range(0, Stingers.Length)], gameObject, 0.7f, 0.7f);
     }
 
     public void SwitchLightOff() {

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Scr_PlayerInput : MonoBehaviour {
 
@@ -18,6 +19,14 @@ public class Scr_PlayerInput : MonoBehaviour {
     public GameObject MainMenuCanvas;
 
     private MyPlayerAction characterActions;
+
+
+    //Audio
+    public AudioMixerSnapshot au_Light;
+    public AudioMixerSnapshot au_Exploring;
+    public float fadeIn;
+    public float fadeOut;
+    bool inLight;
 
 	void OnEnable()
 	{
@@ -97,6 +106,10 @@ public class Scr_PlayerInput : MonoBehaviour {
 
 			// pass all parameters to the character control script
 			m_Character.Move(m_Move, crouch, m_Jump);
+			if (inLight){
+				au_Exploring.TransitionTo(fadeOut);
+				inLight = false;
+			}
         }
 
 		Debug.Log ("h: " + h + ", v: " + v);
@@ -107,6 +120,10 @@ public class Scr_PlayerInput : MonoBehaviour {
 	void OnTriggerStay(Collider other) {
 		if (other.gameObject.tag == "Light"){
 			m_Character.SetSwim(true);
+			if(!Swim){
+				au_Light.TransitionTo(fadeIn);
+				inLight = true;
+				}
 			Swim = true;
 		}
     }

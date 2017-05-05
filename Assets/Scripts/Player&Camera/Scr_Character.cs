@@ -31,6 +31,7 @@ public class Scr_Character : MonoBehaviour {
 	Vector3 m_CapsuleCenter;
 	CapsuleCollider m_Capsule;
 	bool m_Crouching;
+	float m_JumpTimer;
 
 	bool landed = true;
 
@@ -55,6 +56,16 @@ public class Scr_Character : MonoBehaviour {
 
 	public void Move(Vector3 move, bool crouch, bool jump)
 	{
+		if (jump){
+			m_JumpTimer = Time.time + 1f;
+		}
+		if (Time.time < m_JumpTimer){
+			m_GroundCheckDistance = m_OrigGroundCheckDistance;
+		}
+		else{
+			m_GroundCheckDistance = 0.5f;
+		}
+
 
 		// convert the world relative moveInput vector into a local-relative
 		// turn amount and forward amount required to head in the desired
@@ -260,7 +271,7 @@ public class Scr_Character : MonoBehaviour {
 
 	public void SetSwim(bool swim){
 
-		m_Rigidbody.useGravity = !swim;
+		//m_Rigidbody.useGravity = !swim;
 
 		if(swim){
 			m_Rigidbody.velocity = Vector3.zero;
