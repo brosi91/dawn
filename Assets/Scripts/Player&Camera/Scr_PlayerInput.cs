@@ -28,6 +28,7 @@ public class Scr_PlayerInput : MonoBehaviour {
     public float fadeOut;
     bool inLight;
 
+
 	void OnEnable()
 	{
 		// See PlayerActions.cs for this setup.
@@ -133,6 +134,7 @@ public class Scr_PlayerInput : MonoBehaviour {
 	    	DisableSwim();
 	    	m_Character.DolphinJump(m_Move);
     	}
+
     }
 
     public void DisableSwim(){
