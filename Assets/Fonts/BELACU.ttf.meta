@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 78fc34930cf8f441684c65d924930044
+timeCreated: 1495005743
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Belacu
+  fontNames:
+  - Belacu
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

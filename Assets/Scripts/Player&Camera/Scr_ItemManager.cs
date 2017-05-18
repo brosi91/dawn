@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Scr_ItemManager : MonoBehaviour {
 
@@ -64,9 +65,14 @@ public class Scr_ItemManager : MonoBehaviour {
     private MyPlayerAction characterActions;
 
     //für LanternGui
+    public Image lanternImage;
 	public GameObject LanternItem1;
 	public GameObject LanternItem2;
 	public GameObject LanternItem3;
+
+	private float fadeLanternTime = float.MaxValue;
+	public float fadeSpeedLantern;
+	private float faderLantern = 0.5f;
 
 	//für Laterne texturenwechsel
 	public Material matLantern;
@@ -83,6 +89,15 @@ public class Scr_ItemManager : MonoBehaviour {
 	public GameObject Sun;
 	public Camera camPlayer;
 	public Camera camSun;
+	public Camera camThree;
+	public Camera camFour;
+	public Camera camFive;
+
+	private float endTime = float.MaxValue;
+
+	public Image whiteScreen;
+	public float fadeSpeed;
+	private float fader;
 
 
 	//Audio
@@ -98,6 +113,7 @@ public class Scr_ItemManager : MonoBehaviour {
     	ani = GetComponent<Animator>();
 		camPlayer.enabled = true;
 		camSun.enabled = false;
+		camThree.enabled = false;
 
 		rend = objLantern.GetComponent<Renderer>();
 
@@ -164,6 +180,28 @@ public class Scr_ItemManager : MonoBehaviour {
             }
         }
 
+		if(Time.time - endTime > 5f){
+			camSun.enabled = false;
+			camThree.enabled = true;
+			}
+		if(Time.time - endTime > 10f){
+			camThree.enabled = false;
+			camFour.enabled = true;
+			Sun.GetComponent<Scr_Sunrise>().ChangeMat();
+			}
+		if(Time.time - endTime > 15f){
+			camFour.enabled = false;
+			camFive.enabled = true;
+			}
+		if(Time.time - endTime > 20f){
+			fader += fadeSpeed*Time.deltaTime;
+			whiteScreen.color = new Color(1,1,1, fader);
+		}
+
+		if( Time.time - fadeLanternTime > 3f){
+			faderLantern -= fadeSpeedLantern*Time.deltaTime;
+			lanternImage.color = new Color( lanternImage.color.r, lanternImage.color.g, lanternImage.color.b, faderLantern);
+		}
     }
 
     
@@ -303,13 +341,15 @@ public class Scr_ItemManager : MonoBehaviour {
         }
 
 		else if( other.tag == "Sun"){
+			endTime = Time.time;
 
 			GetComponent<Scr_PlayerInput>().TurnOff();
 			Sun.GetComponent<Scr_Sunrise>().enabled = true;
-			camPlayer.tag = "Untagged";
-			camSun.tag = "MainCamera";
+			//camPlayer.tag = "Untagged";
+			//camSun.tag = "MainCamera";
 			camPlayer.enabled = false;
 			camSun.enabled = true;
+			lanternImage.enabled = false;
 
 		}
 
@@ -441,6 +481,7 @@ public class Scr_ItemManager : MonoBehaviour {
 		Scr_Soundmanager.Sound.Play(PickUpFirefly[Random.Range(0,PickUpFirefly.Length)], gameObject, 0.3f, 0.5f, 0.8f, 1.2f);
 
 		ActiveItemLantern = null;
+		LanternFade();
 
     }
 
@@ -457,6 +498,7 @@ public class Scr_ItemManager : MonoBehaviour {
 		InLantern.RemoveAt(0);
 		Scr_Soundmanager.Sound.Play(DropFirefly[Random.Range(0,DropFirefly.Length)], gameObject, 0.3f, 0.5f, 0.8f, 1.2f);
 		Firefly.PlayMusic();
+		LanternFade();
 
     }
 
@@ -481,6 +523,7 @@ public class Scr_ItemManager : MonoBehaviour {
 			InLantern.RemoveAt(0);
 			Scr_Soundmanager.Sound.Play(DropFirefly[Random.Range(0,DropFirefly.Length)], gameObject, 0.3f, 0.5f, 0.8f, 1.2f);
 			Firefly.PlayMusic();
+			LanternFade();
 
 		}
 	}
@@ -507,7 +550,23 @@ public class Scr_ItemManager : MonoBehaviour {
 			InLantern.RemoveAt(0);
 			Scr_Soundmanager.Sound.Play(DropFirefly[Random.Range(0,DropFirefly.Length)], gameObject, 0.3f, 0.5f, 0.8f, 1.2f);
 			Firefly.PlayMusic();
+			LanternFade();
 
 		}
+	}
+
+	void LanternFade(){
+
+		if ( InLantern.Count < 1){
+
+			fadeLanternTime = Time.time;
+		}
+		else {
+
+			fadeLanternTime = float.MaxValue;
+			lanternImage.color = new Color( lanternImage.color.r, lanternImage.color.g, lanternImage.color.b, 0.5f);
+			faderLantern = 0.5f;
+		}
+
 	}
 }
