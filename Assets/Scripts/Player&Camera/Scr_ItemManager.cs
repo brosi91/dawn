@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Scr_ItemManager : MonoBehaviour {
 
@@ -196,6 +197,9 @@ public class Scr_ItemManager : MonoBehaviour {
 		if(Time.time - endTime > 20f){
 			fader += fadeSpeed*Time.deltaTime;
 			whiteScreen.color = new Color(1,1,1, fader);
+		}
+		if(Time.time - endTime > 27f){
+			SceneManager.LoadScene(0);
 		}
 
 		if( Time.time - fadeLanternTime > 3f){
