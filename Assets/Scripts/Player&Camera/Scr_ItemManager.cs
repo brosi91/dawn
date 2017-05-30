@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class Scr_ItemManager : MonoBehaviour {
 
@@ -107,6 +108,11 @@ public class Scr_ItemManager : MonoBehaviour {
 	public AudioClip[] PickUpFirefly;
 	public AudioClip[] DropFirefly;
 
+	//Music change
+	public AudioMixerSnapshot changeEnd;
+	public AudioClip endTrack;
+	private bool endMusicOn;
+
 
 
     void Awake(){
@@ -117,6 +123,7 @@ public class Scr_ItemManager : MonoBehaviour {
 		camThree.enabled = false;
 
 		rend = objLantern.GetComponent<Renderer>();
+		endMusicOn = false;
 
     }
 
@@ -198,7 +205,7 @@ public class Scr_ItemManager : MonoBehaviour {
 			fader += fadeSpeed*Time.deltaTime;
 			whiteScreen.color = new Color(1,1,1, fader);
 		}
-		if(Time.time - endTime > 27f){
+		if(Time.time - endTime > 31f){
 			SceneManager.LoadScene(0);
 		}
 
@@ -344,7 +351,7 @@ public class Scr_ItemManager : MonoBehaviour {
 			ContainItem = other.GetComponent<Scr_ContainItem> ();
         }
 
-		else if( other.tag == "Sun"){
+		else if( other.tag == "Sun" && endMusicOn == false){
 			endTime = Time.time;
 
 			GetComponent<Scr_PlayerInput>().TurnOff();
@@ -354,6 +361,9 @@ public class Scr_ItemManager : MonoBehaviour {
 			camPlayer.enabled = false;
 			camSun.enabled = true;
 			lanternImage.enabled = false;
+			changeEnd.TransitionTo(1f);
+			Scr_Soundmanager.Sound.Play( endTrack, gameObject,0.8f, 0.8f, 1f, 1f, 1000f, 0f);
+			endMusicOn = true;
 
 		}
 
