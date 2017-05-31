@@ -8,6 +8,8 @@ public class Scr_Character : MonoBehaviour {
 	public float SwimTurnSpeed;
 	public float DolphinForce;
 
+	public AudioSource SwimSoundSource;
+
 	private Scr_AnimationLayers Layers;
 
 	[SerializeField] float m_MovingTurnSpeed = 360;
@@ -37,7 +39,8 @@ public class Scr_Character : MonoBehaviour {
 
 	public AudioClip[] JumpSounds;
 	public AudioClip[] LandSounds;
-
+	public AudioClip[] SwimSounds;
+	float swimspeed;
 
 	void Start()
 	{
@@ -193,7 +196,7 @@ public class Scr_Character : MonoBehaviour {
 			m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, m_JumpPower, m_Rigidbody.velocity.z);
 			m_IsGrounded = false;
 			landed = false;
-			Scr_Soundmanager.Sound.Play(JumpSounds[Random.Range(0,JumpSounds.Length)], gameObject, 0.3f, 0.4f);
+			Scr_Soundmanager.Sound.Play(JumpSounds[Random.Range(0,JumpSounds.Length)], gameObject, 0.3f, 0.4f, 0.8f, 1.2f);
 			m_Animator.applyRootMotion = false;
 			m_GroundCheckDistance = 0.1f;
 		}
@@ -233,7 +236,7 @@ public class Scr_Character : MonoBehaviour {
 			m_GroundNormal = hitInfo.normal;
 			m_IsGrounded = true;
 			if(landed == false){
-				Scr_Soundmanager.Sound.Play(LandSounds[Random.Range(0,LandSounds.Length)], gameObject, 0.3f, 0.4f);
+				Scr_Soundmanager.Sound.Play(LandSounds[Random.Range(0,LandSounds.Length)], gameObject, 0.3f, 0.4f, 0.8f, 1.1f);
 				landed = true;
 			}
 			m_Animator.applyRootMotion = true;
@@ -250,7 +253,7 @@ public class Scr_Character : MonoBehaviour {
 
 		m_Rigidbody.MovePosition(transform.position+move* SwimSpeed);
 		landed = false;
-
+		swimspeed = move.magnitude;
 		//ist input da?
 		if(move.magnitude>0){
 			//wenn input, zielrotation ist richtung (move), langsam rotieren bis zu (target)
@@ -263,7 +266,12 @@ public class Scr_Character : MonoBehaviour {
 					newAngle = 260f;
 				}
 				transform.rotation = Quaternion.Euler ( newAngle, transform.eulerAngles.y, transform.eulerAngles.z);
-			}
+			}/*
+			if (!SwimSoundSource.isPlaying){
+				SwimSoundSource.clip = SwimSounds[Random.Range(0,SwimSounds.Length)];
+				SwimSoundSource.Play();
+				//Scr_Soundmanager.Sound.Play(SwimSounds[Random.Range(0,SwimSounds.Length)], gameObject, 0.5f, 0.7f, 0.8f, 1.2f);
+			}*/
 		}
 		m_Animator.SetFloat("SwimSpeed", move.magnitude);
 
@@ -296,6 +304,12 @@ public class Scr_Character : MonoBehaviour {
 		}
 		else{
 			return angle;
+		}
+	}
+
+	public void TriggerSwimSound(){
+		if (swimspeed > 0.1f){
+			Scr_Soundmanager.Sound.Play(SwimSounds[Random.Range(0,SwimSounds.Length)], gameObject, 0.15f, 0.25f, 1f, 1.4f);
 		}
 	}
 
